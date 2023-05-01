@@ -3,6 +3,8 @@
 
 .text-data {
     vertical-align: top;
+    text-align: left;
+    padding-left: 10px;
     width:25%;
  }
 
