@@ -1,22 +1,24 @@
 body {
-    background-color: #1f242c;
+    background-image: linear-gradient(to top, #1f242c, #1f2c37, #1c3542, #143e4c, #044754);
+    background-attachment: fixed;
 }
 
 .total-song {
+    padding: 10%;
 }
 
 .text-data {
     vertical-align: top;
     text-align: left;
     padding-left: 10px;
-    width:25%;
+    width:40%;
+    display: inline-block;
  }
 
  .song-title {
     font-size: 40px;
     font-weight: bold;
     color: #e0e0e0;
-
  }
 
  .artist {
@@ -28,17 +30,19 @@ body {
  .year {
      font-size: reading;
      color: #e0e0e0;
-     font-size: 30px;
+     font-size: 24px;
 }
 
 .image-data {
     width: 30%;
+    display: inline-block;
 }
 
  img {
     border-radius: 5px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    width: 200px;
+    width: 350px;
+    float: center;
  }
 
  .rating-box {
@@ -46,6 +50,8 @@ body {
     border-radius: 10px;
     width: 280px;
     margin-top: 40px;
+    float: right;
+    opacity: 0.9;
  }
 
 /* Ratings widget */
@@ -119,7 +125,6 @@ label:hover ~ input:checked ~ label /* highlight previous selected stars */ { co
 }
 
 .column {
-  float: left;
 }
 
 /* Clear floats after the columns */
