@@ -9,7 +9,7 @@
  }
 
  .song-title {
-    font-size: medium;
+    font-size: large;
     font-weight: bold;
  }
 
@@ -34,7 +34,7 @@
  .rating-box {
     background-color: grey;
     border-radius: 10px;
-    padding-right: 10px;
+    width: 40%;
  }
 
 /* Ratings widget */
@@ -100,6 +100,10 @@ label:hover ~ input:checked ~ label /* highlight previous selected stars */ { co
     align: center;
 }
 
+.add-review: hover {
+    text-color: grey;
+}
+
 .column {
   float: left;
 }
@@ -109,4 +113,8 @@ label:hover ~ input:checked ~ label /* highlight previous selected stars */ { co
   content: "";
   display: table;
   clear: both;
+}
+
+a {
+    color: black;
 }
