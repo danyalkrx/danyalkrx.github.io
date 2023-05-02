@@ -1,3 +1,7 @@
+body {
+    background-color: #1f242c;
+}
+
 .total-song {
 }
 
@@ -9,32 +13,39 @@
  }
 
  .song-title {
-    font-size: large;
+    font-size: 40px;
     font-weight: bold;
+    color: #e0e0e0;
+
  }
 
  .artist {
     font-size: reading;
+    color: #e0e0e0;
+    font-size: 24px;
  }
 
  .year {
      font-size: reading;
+     color: #e0e0e0;
+     font-size: 30px;
 }
 
 .image-data {
-    width: 25%;
+    width: 30%;
 }
 
  img {
     border-radius: 5px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    width: 100%;
+    width: 200px;
  }
 
  .rating-box {
     background-color: grey;
     border-radius: 10px;
-    width: 40%;
+    width: 280px;
+    margin-top: 40px;
  }
 
 /* Ratings widget */
@@ -43,6 +54,7 @@
     border: 0;
     width: 80%;
     align: center;
+    padding-bottom: 0px;
 }
 
 /* Hide radio */
@@ -87,6 +99,8 @@ label:hover ~ input:checked ~ label /* highlight previous selected stars */ { co
     overflow: hidden;
     outline: none;
     transform: translateY(50%);
+    font-size: 15px;
+    float: right;
 }
 
 .add-review {
