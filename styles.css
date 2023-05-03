@@ -48,15 +48,26 @@
   }
 }
 
-.footer {
+#footer {
     background-color: #1f3b4d;
-    padding: 10px 10px 0px 10px;
-    position: fixed;
+    padding-top: 10px;
+    position: absolute;
     bottom: 0;
     width: 100%;
 }
 
+#page-container {
+  position: relative;
+  min-height: 100vh;
+}
+
+#content-wrap {
+  padding-bottom: 2.5rem;    /* Footer height */
+}
+
+
 body {
     background-color: #1f242c;
     margin: 0;
+    min-height: 100vh;
 }

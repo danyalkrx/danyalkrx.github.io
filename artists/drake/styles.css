@@ -46,7 +46,7 @@ body {
  }
 
  .rating-box {
-    background-color: grey;
+    background-color: #a7d3dd;
     border-radius: 10px;
     width: 280px;
     margin-top: 40px;
@@ -109,6 +109,10 @@ label:hover ~ input:checked ~ label /* highlight previous selected stars */ { co
     float: right;
 }
 
+.close-button:focus{
+
+}
+
 .add-review {
     background-color: transparent;
     background-repeat: no-repeat;
@@ -136,4 +140,7 @@ label:hover ~ input:checked ~ label /* highlight previous selected stars */ { co
 
 a {
     color: black;
+}
+
+.histogram {
 }
