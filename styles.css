@@ -1,8 +1,12 @@
 /* Style the header with a grey background and some padding */
 .header {
   overflow: hidden;
-  background-color: #1f3b4d;
+  background-color: #0f0f0f;
   padding: 20px 10px;
+}
+
+* {
+    box-sizing: border-box;
 }
 
 /* Style the header links */
@@ -49,7 +53,7 @@
 }
 
 #footer {
-    background-color: #1f3b4d;
+    background-color: #0f0f0f;
     padding-top: 10px;
     position: absolute;
     bottom: 0;
@@ -58,7 +62,7 @@
 
 #page-container {
   position: relative;
-  min-height: 100vh;
+  height:90vh;
 }
 
 #content-wrap {
@@ -67,7 +71,36 @@
 
 
 body {
-    background-color: #1f242c;
+    background-color: #0f0f0f;
     margin: 0;
     min-height: 100vh;
+}
+
+.image-box {
+    position: relative;
+    height: 15em;
+    margin-bottom: 2em;
+    padding: 3em 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #5e616c;
+    background-image: url("https://wallpaperaccess.com/full/3850473.jpg");
+    background-blend-mode: multiply;
+
+}
+
+.image-box .item > img {
+    top: 50px;
+}
+
+p {
+    color: white;
+    padding: 20px;
+    display: block;
+}
+
+p a {
+    text-decoration: none;
+    color: grey;
 }
