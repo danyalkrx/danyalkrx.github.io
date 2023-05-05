@@ -42,7 +42,7 @@
 }
 
 /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
-@media screen and (max-width: 540px) {
+@media screen and (max-width: 750px) {
   .header a {
     float: none;
     display: block;
@@ -50,22 +50,22 @@
   }
   #page-container {
     margin-inline: auto;
+    margin-right: 5%;
+    margin-left: 5%;
+    min-width: 345px;
   }
   .header-right {
-    float: none;
+    float: left;
   }
-}
-
-@media screen and (max-width: 750px) {
-  #page-container {
-    min-width: 345px;
+  .header {
+    margin-left: 33.3%
   }
   p {
     padding: 20px 0 20px 0 !important;
   }
 }
 
-@media screen and (min-width: 750px) {
+@media screen and (min-width: 751px) {
   #page-container {
     min-width: 600px;
   }
