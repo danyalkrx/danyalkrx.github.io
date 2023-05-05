@@ -48,6 +48,9 @@
     display: block;
     text-align: left;
   }
+  #page-container {
+    margin-inline: auto;
+  }
   .header-right {
     float: none;
   }
