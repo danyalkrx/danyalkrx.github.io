@@ -3,6 +3,7 @@
   overflow: hidden;
   background-color: #f3f2f0;
   padding: 20px 10px;
+  max-width: 600px;
 }
 
 * {
@@ -41,7 +42,7 @@
 }
 
 /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 540px) {
   .header a {
     float: none;
     display: block;
@@ -52,11 +53,18 @@
   }
 }
 
-@media all and (max-width: 500px) {
+@media screen and (max-width: 750px) {
   #page-container {
-  position: relative;
-  margin-left: 5%;
-  margin-right: 5%;
+    min-width: 345px;
+  }
+  p {
+    padding: 20px 0 20px 0 !important;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  #page-container {
+    min-width: 600px;
   }
 }
 
@@ -69,13 +77,16 @@
 }
 
 #page-container {
-  position: relative;
-  margin-left:33%;
-  margin-right:33%;
+    position: relative;
+    width: 33.3%;
+    margin-inline: auto;
 }
 
 #content-wrap {
   padding-bottom: 2.5rem;    /* Footer height */
+  width 80%;
+  margin 0 auto;
+  padding 0 20px;
 }
 
 
@@ -86,7 +97,6 @@ body {
 }
 
 .image-box {
-    position: relative;
     height: 15em;
     margin-bottom: 2em;
     padding: 3em 0;
@@ -107,6 +117,7 @@ p {
     color: black;
     padding: 20px;
     display: block;
+    font-size: 1em;
 }
 
 p a {
