@@ -210,3 +210,7 @@ h1 {
   box-shadow: inset 1000px 110px 0 0 #305ca9;
   color: white !important;
 }
+
+h3 {
+    margin-left: 20px;
+}
