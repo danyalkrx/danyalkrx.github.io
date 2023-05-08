@@ -236,7 +236,7 @@ h3 {
     display: block;
 }
 
-figure {
+.figure-preview {
     width: 297px;
     height: 297px;
     text-align: center;
@@ -258,8 +258,20 @@ figcaption span {
     color: #305ca9;
 }
 
-figure img {
+.figure-image {
     width: 280px;
     height: 280px;
     margin: 0;
+}
+
+.figure-content {
+    object-fit: contain;
+    width: 100%;
+    margin-inline: auto;
+    margin-left: 10px;
+}
+
+.figure-caption {
+    font-size: 0.9em;
+    margin-left: 10px;
 }
