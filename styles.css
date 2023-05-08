@@ -269,6 +269,7 @@ figcaption span {
     width: 100%;
     margin-inline: auto;
     margin-left: 10px;
+    margin-right: 10px;
 }
 
 .figure-caption {
