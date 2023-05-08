@@ -235,3 +235,31 @@ h3 {
     margin-left: 10px;
     display: block;
 }
+
+figure {
+    width: 297px;
+    height: 297px;
+    text-align: center;
+    display: inline-block;
+    margin-inline: auto;
+    line-height: 22px;
+}
+
+figcaption span {
+    font-weight: bold;
+}
+
+.figure-links {
+    color: black;
+    text-decoration: none;
+}
+
+.figure-links:hover {
+    color: #305ca9;
+}
+
+figure img {
+    width: 280px;
+    height: 280px;
+    margin: 0;
+}
