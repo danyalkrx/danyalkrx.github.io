@@ -140,7 +140,7 @@ p {
     display: block;
 }
 
-#logo:hover {
+.logo:hover {
     -webkit-filter: drop-shadow(0 0 0.75rem blue);
     -webkit-transition: .2s ease-in-out;
     -moz-filter: drop-shadow(0 0 0.75rem blue);;
