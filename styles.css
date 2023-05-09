@@ -272,7 +272,18 @@ figcaption span {
     margin-right: 10px;
 }
 
+.content-figure {
+   position: relative;
+  display: inline-block;
+}
+
 .figure-caption {
     font-size: 0.9em;
-    margin-left: 10px;
+    margin-left: 20px;
+    position: absolute;
+    top: 0;
+    right: -220px; /* adjust this value to your liking */
+    width: 200px;
+    padding: 10px;
+
 }
