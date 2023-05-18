@@ -286,3 +286,11 @@ figcaption span {
     width: 200px;
     padding: 10px;
 }
+
+.wakefield-map {
+    object-fit: contain;
+    width: 600px;
+    margin-inline: auto;
+    margin-left: 10px;
+    margin-right: 10px;
+}
