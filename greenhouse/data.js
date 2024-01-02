@@ -118,7 +118,7 @@ export const inputData = [
         "Family Name": "Aloeaceae",
         "Scientific Name": "Aloe vera",
         "Common Name": "Aloe Vera",
-        "In Seed Bank": "",
+        "In Seed Bank": "Checked",
         "In Inventory": "Yes"
     },
     {
