@@ -39,20 +39,20 @@ function buildTable(data) {
                     var img = document.createElement("img");
                     img.src = data[i][key];
                     img.alt = "Image";
-                    img.style.maxWidth = "100px"; // Adjust the max width as needed
+                    img.style.maxHeight = "100px"; // Adjust the max width as needed
 
                     // Add event listener for hover effect
                     img.addEventListener('mouseover', function() {
-                        this.style.width = "100%";
-                        this.style.height = "auto";
-                        this.style.maxWidth = "500px";
+                        this.style.height = "100%";
+                        this.style.width = "auto";
+                        this.style.maxHeight = "500px";
                     });
 
                     // Add event listener for mouseout to reset styles
                     img.addEventListener('mouseout', function() {
-                        this.style.width = "100px";
-                        this.style.height = "auto";
-                        this.style.maxWidth = "100px";
+                        this.style.height = "100px";
+                        this.style.width = "auto";
+                        this.style.maxHeight = "100px";
                     });
 
                     cell.appendChild(img);
