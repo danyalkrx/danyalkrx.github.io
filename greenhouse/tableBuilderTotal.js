@@ -173,7 +173,9 @@ function buildDataTable(data) {
 
 // Example usage of buildDataTable function with imported data
 var dataTableContainer = buildDataTable(inputData);
-document.body.appendChild(dataTableContainer);
+
+// Create a container for buttons and tables
+var container = document.createElement("div");
 
 // Function to toggle table visibility
 function toggleTableVisibility(table, button) {
@@ -204,6 +206,11 @@ toggleDataTableButton.onclick = function() {
     toggleTableVisibility(dataTableContainer, toggleDataTableButton);
 };
 
-// Append buttons to the document body or any other desired container
-document.body.appendChild(toggleFigureButton);
-document.body.appendChild(toggleDataTableButton);
+// Append buttons and tables to the container
+container.appendChild(toggleFigureButton);
+container.appendChild(toggleDataTableButton);
+container.appendChild(figureTableContainer);
+container.appendChild(dataTableContainer);
+
+// Append the container to the document body
+document.body.appendChild(container);
