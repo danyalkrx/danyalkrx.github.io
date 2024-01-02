@@ -186,16 +186,7 @@ function toggleTableVisibility(table, button) {
         toggleFigureButton.disabled = false;
     }
 
-    table.style.display = table.style.display === "none" ? "block" : "none";
-
-    // Set the width to 100% when the table is visible
-    if (table.style.display === "block") {
-        table.style.width = "100%";
-    } else {
-        // Reset the width to its original value when hidden
-        table.style.width = "";
-    }
-
+    table.style.display = table.style.display === "none" ? "table" : "none";
     button.disabled = true;
 }
 
