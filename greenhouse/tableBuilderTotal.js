@@ -12,6 +12,7 @@ function buildFigureTable(data) {
 
     // Create a container element
     var container = document.createElement("div");
+    container.id = "figureTableContainer";
     container.className = "data-container";
 
     // Create elements for each data entry
@@ -99,6 +100,7 @@ function buildDataTable(data) {
 
     // Create a table element
     var table = document.createElement("table");
+    table.id = "dataTableContainer";
     table.style.display = "none"; // Initially hide the table
 
     // Create a header row
@@ -174,21 +176,32 @@ var dataTableContainer = buildDataTable(inputData);
 document.body.appendChild(dataTableContainer);
 
 // Function to toggle table visibility
-function toggleTableVisibility(table) {
+function toggleTableVisibility(table, button) {
+    // Hide the other table before showing the selected one
+    if (table.id === "figureTableContainer") {
+        dataTableContainer.style.display = "none";
+        toggleDataTableButton.disabled = false;
+    } else if (table.id === "dataTableContainer") {
+        figureTableContainer.style.display = "none";
+        toggleFigureButton.disabled = false;
+    }
+
     table.style.display = table.style.display === "none" ? "block" : "none";
+    button.disabled = true;
 }
 
 // Create buttons to toggle table visibility
 var toggleFigureButton = document.createElement("button");
 toggleFigureButton.textContent = "Toggle Figure Table";
 toggleFigureButton.onclick = function() {
-    toggleTableVisibility(figureTableContainer);
+    toggleTableVisibility(figureTableContainer, toggleFigureButton);
 };
+toggleFigureButton.disabled = true; // Initially disable the figure button
 
 var toggleDataTableButton = document.createElement("button");
 toggleDataTableButton.textContent = "Toggle Data Table";
 toggleDataTableButton.onclick = function() {
-    toggleTableVisibility(dataTableContainer);
+    toggleTableVisibility(dataTableContainer, toggleDataTableButton);
 };
 
 // Append buttons to the document body or any other desired container
