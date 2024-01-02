@@ -61,6 +61,8 @@ function buildFigureTable(data) {
         // Create a span element for Seed Availability (unbolded)
         var seedAvailability = document.createElement("span");
         seedAvailability.textContent = "Seed: " + (data[i]["In Seed Bank"] === "Checked" ? "Available" : "Unavailable");
+        seedAvailability.style.fontWeight = "initial";
+
 
         // Append elements to the figcaption
         figcaption.appendChild(familyName);
