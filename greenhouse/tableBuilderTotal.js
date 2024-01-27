@@ -77,6 +77,26 @@ function buildFigureTable(data) {
         figure.appendChild(img);
         figure.appendChild(figcaption);
 
+        // Check if there is data in the "Copyright" field
+        if (data[i]["Copyright"]) {
+            // Create a div element for copyright
+            var copyrightBox = document.createElement("div");
+            copyrightBox.className = "copyright-box";
+            copyrightBox.textContent = "© " + data[i]["Copyright"];
+            // Position the copyright box
+            copyrightBox.style.position = "absolute";
+            copyrightBox.style.bottom = "17px";
+            copyrightBox.style.right = "8px";
+            copyrightBox.style.backgroundColor = "rgba(255, 255, 255, 0.5)";
+            copyrightBox.style.padding = "5px";
+            // Set figure position to relative
+            figure.style.position = "relative";
+
+            // Append the copyright box to the figure
+            figure.appendChild(copyrightBox);
+        }
+
+
         // Append the figure to the link
         link.appendChild(figure);
 
