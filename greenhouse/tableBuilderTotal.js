@@ -199,6 +199,8 @@ var dataTableContainer = buildDataTable(inputData);
 // Create a container for buttons and tables
 var container = document.createElement("div");
 
+
+
 // Function to toggle table visibility
 function toggleTableVisibility(table, button) {
     // Hide the other table before showing the selected one
@@ -228,11 +230,13 @@ toggleDataTableButton.onclick = function() {
     toggleTableVisibility(dataTableContainer, toggleDataTableButton);
 };
 
+/*
 // Append buttons and tables to the container
 container.appendChild(toggleFigureButton);
 container.appendChild(toggleDataTableButton);
 container.appendChild(figureTableContainer);
 container.appendChild(dataTableContainer);
+*/
 
 // Append the container to the document body
 document.body.appendChild(container);
