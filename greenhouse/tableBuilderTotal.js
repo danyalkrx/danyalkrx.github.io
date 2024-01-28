@@ -88,7 +88,8 @@ function buildFigureTable(data) {
             copyrightBox.style.bottom = "17px";
             copyrightBox.style.right = "8px";
             copyrightBox.style.backgroundColor = "rgba(255, 255, 255, 0.5)";
-            copyrightBox.style.padding = "5px";
+            copyrightBox.style.padding = "2.5px";
+            copyrightBox.style.fontSize = "small";
             // Set figure position to relative
             figure.style.position = "relative";
 
