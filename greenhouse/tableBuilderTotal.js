@@ -112,6 +112,10 @@ function buildFigureTable(data) {
 // Example usage of buildFigureTable function with imported data
 var figureTableContainer = buildFigureTable(inputData);
 document.body.appendChild(figureTableContainer);
+        figureTableContainer.style.display = "flex";
+        figureTableContainer.style.flexWrap = "wrap";
+        figureTableContainer.style.justifyContent = "center";
+
 
 function buildDataTable(data) {
     // Sort the data array alphabetically based on the "Scientific Name" field
