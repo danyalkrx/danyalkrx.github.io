@@ -23,7 +23,7 @@ function buildFigureTable(data) {
         }
 
         // Create a link element
-        var link = document.createElement("a");
+        var link = document.createElement("span");
         link.className = "figure-links";
         link.href = "#"; // Replace with the actual link if available
 
