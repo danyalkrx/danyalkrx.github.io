@@ -60,7 +60,7 @@ function buildFigureTable(data) {
 
         // Create a span element for Seed Availability (unbolded)
         var seedAvailability = document.createElement("span");
-        seedAvailability.textContent = "Seed: " + (data[i]["In Seed Bank"] === "Checked" ? "Available" : "Unavailable");
+        seedAvailability.textContent = "Seed: " + (data[i]["In Seed Bank"] === "Yes" ? "Available" : "Unavailable");
         seedAvailability.style.fontWeight = "initial";
 
 
@@ -177,7 +177,7 @@ function buildDataTable(data) {
                     // Check if the key is "In Seed Bank" (case-insensitive) and create a checkbox
                     var checkbox = document.createElement("input");
                     checkbox.type = "checkbox";
-                    checkbox.checked = data[i][key].toLowerCase() === "checked";
+                    checkbox.checked = data[i][key].toLowerCase() === "Yes";
                     checkbox.onclick = function() {
                         return false;
                     };
