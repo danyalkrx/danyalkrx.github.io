@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Rolled Up Posters</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
+</head>
+<body>
+    <script>
+        // Set up scene, camera, and renderer
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setClearColor(new THREE.Color(0x808080)); // Set background color to neutral grey
+        document.body.appendChild(renderer.domElement);
+
+        // Array of image URLs for posters
+        const posterImages = [
+            'https://m.media-amazon.com/images/I/71eHZFw+GlL._AC_UF894,1000_QL80_.jpg', 'https://i.etsystatic.com/18242346/r/il/7ad080/4580913585/il_570xN.4580913585_3yhu.jpg', 'https://i.ebayimg.com/images/g/a00AAOSw3E1gnSNy/s-l1600.jpg', 'https://i.ebayimg.com/images/g/Pc8AAOSwWBth9cf2/s-l1200.webp', /* Add more image URLs here */
+        ];
+
+        // Function to create a rolled-up poster
+        function createRolledUpPoster(xGrid, yGrid, imageURL) {
+            // Load the texture asynchronously
+            const textureLoader = new THREE.TextureLoader();
+            textureLoader.load(imageURL, function(texture) {
+                // Create the outer cylinder
+                const radiusTop = 2.5; // Top radius
+                const radiusBottom = 2.5; // Bottom radius
+                const height = 20; // Cylinder height
+                const radialSegments = 32; // Number of segments around the circumference
+
+                const outerGeometry = new THREE.CylinderGeometry(radiusTop, radiusBottom, height, radialSegments, 1, true); // Set openEnded to true
+                const outerMaterial = new THREE.MeshStandardMaterial({
+                    color: 0xFAF9F6, // Off-white color
+                    roughness: 0.2, // Adjust the roughness for a glossy appearance
+                    metalness: 0.8, // Adjust the metalness for reflections
+                    side: THREE.DoubleSide, // Render both sides of faces
+                });
+                const outerCylinder = new THREE.Mesh(outerGeometry, outerMaterial);
+
+                // Create the inner cylinder for thickness
+                const innerGeometry = new THREE.CylinderGeometry(radiusTop - 0.2, radiusBottom - 0.2, height + 0.4, radialSegments, 1, true); // Set openEnded to true
+                const innerMaterial = new THREE.MeshBasicMaterial({ map: texture, side: THREE.BackSide, transparent: true, opacity: 0.5 }); // Translucent material for the inside
+                const innerCylinder = new THREE.Mesh(innerGeometry, innerMaterial);
+
+                // Group both cylinders together
+                const posterGroup = new THREE.Group();
+                posterGroup.add(outerCylinder);
+                posterGroup.add(innerCylinder);
+
+                // Set position of the poster group based on the grid coordinates
+                const posterSpacing = 3; // Adjust the spacing between posters (equivalent to 3 cm)
+                posterGroup.position.x = xGrid * (radiusTop * 2 + posterSpacing);
+                posterGroup.position.y = yGrid * (radiusTop * 2 + posterSpacing);
+
+                // Add the poster group to the scene
+                scene.add(posterGroup);
+
+                // Enable rotation with mouse drag
+                let isDragging = false;
+                let previousMousePosition = { x: 0, y: 0 };
+
+                document.addEventListener('mousedown', (event) => {
+                    isDragging = true;
+                    previousMousePosition = { x: event.clientX, y: event.clientY };
+                });
+
+                document.addEventListener('mouseup', () => {
+                    isDragging = false;
+                });
+
+                document.addEventListener('mousemove', (event) => {
+                    if (!isDragging) return;
+
+                    const deltaMove = {
+                        x: event.clientX - previousMousePosition.x,
+                        y: event.clientY - previousMousePosition.y,
+                    };
+
+                    const rotationSpeed = 0.01;
+
+                    // Rotate the current poster group
+                    posterGroup.rotation.x += deltaMove.y * rotationSpeed;
+                    posterGroup.rotation.y += deltaMove.x * rotationSpeed;
+
+                    // Update previous mouse position
+                    previousMousePosition = { x: event.clientX, y: event.clientY };
+                });
+            });
+        }
+
+        // Create a 5x10 grid of rolled-up posters
+        for (let x = 0; x < 5; x++) {
+            for (let y = 0; y < 10; y++) {
+                const imageURL = posterImages[0]; // Use the first image URL for all posters
+                createRolledUpPoster(x, y, imageURL);
+            }
+        }
+
+        // Position the camera
+        camera.position.z = 30;
+
+        // Add ambient light
+        const ambientLight = new THREE.AmbientLight(0x404040); // Soft white ambient light
+        scene.add(ambientLight);
+
+        // Add directional light
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5); // White directional light
+        directionalLight.position.set(0, 1, 0); // Set light direction
+        scene.add(directionalLight);
+
+        // Handle arrow key events for camera movement
+        document.addEventListener('keydown', (event) => {
+            const speed = 0.5;
+            switch (event.key) {
+                case 'ArrowUp':
+                    camera.position.y += speed;
+                    break;
+                case 'ArrowDown':
+                    camera.position.y -= speed;
+                    break;
+                case 'ArrowLeft':
+                    camera.position.x -= speed;
+                    break;
+                case 'ArrowRight':
+                    camera.position.x += speed;
+                    break;
+            }
+        });
+
+        // Create an animation loop
+        const animate = function () {
+            requestAnimationFrame(animate);
+
+            renderer.render(scene, camera);
+        };
+
+        // Start the animation loop
+        animate();
+    </script>
+</body>
+</html>
