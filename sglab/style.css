@@ -5,6 +5,11 @@
   padding: 20px 10%;
 }
 
+@media print {
+  footer {page-break-after: always;}
+}
+
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -73,6 +78,10 @@ body {
     padding: 10px 15%;
     font-size:20px;
     color: black;
+}
+
+.research-box {
+  display: inline-block;
 }
 
 .people-box {
@@ -162,4 +171,10 @@ p {
 
 .no_underline {
   text-decoration: none;
+}
+
+.research_img {
+    max-height: 300px;
+    object-fit: cover;
+    margin: 5px;
 }
