@@ -174,7 +174,8 @@ p {
 }
 
 .research_img {
-    max-height: 300px;
+    max-height: 400px;
     object-fit: cover;
-    margin: 5px;
+    margin-left: 20px;
+    margin-bottom: 20px;
 }
