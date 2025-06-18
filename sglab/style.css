@@ -121,8 +121,8 @@ body {
   padding: 10px;
   border-width:3px;
   border-style:solid;
-  border-color:purple;
-  background-color: rgba(255, 255, 255, 0.5);
+  border-color:white;
+  background-color: rgba(255, 255, 255, 0.4);
 }
 
 .parallax {
