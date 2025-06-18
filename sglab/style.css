@@ -154,3 +154,7 @@ p {
     padding-bottom: 10px;
     font-size: 1em;
 }
+
+.no_underline {
+  text-decoration: none;
+}
