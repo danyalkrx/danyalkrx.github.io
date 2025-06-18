@@ -114,16 +114,20 @@ body {
 }
 
 .centered {
-  position: absolute;
+  /*position: absolute;
   top: 28%;
   left: 14%;
+  */
+  text-align: center;
   color: white;
-  padding: 10px;
+  padding-top: 150px;
   margin-right: 10px;
-  border-width:3px;
+  text-position: center;
+  /*border-width:3px;
   border-style:solid;
   border-color:white;
   background-color: rgba(0, 255, 255, 0.2);
+  */
 }
 
 .parallax {
