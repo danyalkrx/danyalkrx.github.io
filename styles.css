@@ -9,8 +9,30 @@
     box-sizing: border-box;
 }
 
+.logo {
+  font-size: 25px;
+  font-weight: bold;
+  padding-left: 0;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  float: left;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  -moz-transition: all .2s ease-in;
+  -o-transition: all .2s ease-in;
+  -webkit-transition: all .2s ease-in;
+  transition: all .2s ease-in;
+  margin:0;
+}
+
+.logo h1 {
+    margin: 0;
+    padding: 0;
+}
+
 /* Style the header links */
-.header a {
+.header-right a {
   float: left;
   color: black;
   text-align: center;
@@ -24,20 +46,13 @@
   font-weight: bold;
 }
 
-/* Style the logo link (notice that we set the same value of line-height and font-size to prevent the header to increase when the font gets bigger */
-.logo {
-  font-size: 25px;
-  font-weight: bold;
- }
-
 /* Float the link section to the right */
 .header-right {
   float: right;
-  background: #ecebea;
 }
 
 .header-right a:hover {
-    background: #404040;
+    background: grey;
     color: white;
 }
 
@@ -140,12 +155,15 @@ p {
 }
 
 .logo:hover {
+    color: #305ca9;
+    /*
     -webkit-filter: drop-shadow(0 0 0.75rem blue);
     -webkit-transition: .2s ease-in-out;
     -moz-filter: drop-shadow(0 0 0.75rem blue);;
     -moz-transition: .2s ease-in-out;
     -o-filter: drop-shadow(0 0 0.75rem blue);;
     -o-transition: .2s ease-in-out;
+    */
 }
 
 h1 .name-title{
