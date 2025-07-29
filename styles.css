@@ -156,6 +156,7 @@ p {
 
 .logo:hover {
     color: #305ca9;
+    -webkit-transition: all .2s ease-in;
     /*
     -webkit-filter: drop-shadow(0 0 0.75rem blue);
     -webkit-transition: .2s ease-in-out;
@@ -306,4 +307,15 @@ figcaption span {
     margin-inline: auto;
     margin-left: 10px;
     margin-right: 10px;
+}
+
+.course-link {
+    text-decoration: none;
+    color: black;
+    border-bottom: 20px;
+}
+
+.course-link:hover {
+    color: #305ca9;
+    -webkit-transition: all .2s ease-in;
 }
