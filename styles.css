@@ -323,3 +323,36 @@ figcaption span {
     color: #305ca9;
     -webkit-transition: all .2s ease-in;
 }
+
+    .logo-hover {
+      position: relative;
+      width: 55px; /* adjust size as needed */
+      height: auto;
+    }
+
+    .logo-hover img {
+      width: 100%;
+      height: auto;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    .logo-hover .blue-logo {
+      opacity: 0;
+      z-index: 1;
+    }
+
+    .logo-hover .black-logo {
+      opacity: 1;
+      z-index: 2;
+    }
+
+    .logo-hover:hover .blue-logo {
+      opacity: 1;
+    }
+
+    .logo-hover:hover .black-logo {
+      opacity: 0;
+    }
