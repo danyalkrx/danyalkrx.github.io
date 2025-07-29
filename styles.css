@@ -3,7 +3,6 @@
   overflow: hidden;
   background-color: #f3f2f0;
   padding: 20px 10px;
-  max-width: 600px;
 }
 
 * {
@@ -87,7 +86,7 @@
 
 #page-container {
     position: relative;
-    width: 33.3%;
+    width: 50%;
     margin-inline: auto;
 }
 
