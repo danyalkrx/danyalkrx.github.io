@@ -142,7 +142,7 @@ body {
 
 p {
     color: black;
-    padding: 10px;
+    padding-left: 10px;
     display: block;
     font-size: 1em;
     font: inherit;
