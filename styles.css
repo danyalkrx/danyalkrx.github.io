@@ -67,6 +67,10 @@
     display: block;
     text-align: left;
   }
+  .logo-hover {
+    padding-bottom: 25px;
+    align: center;
+  }
   #page-container {
     margin-inline: auto;
     margin-right: 5%;
@@ -77,13 +81,12 @@
     float: left;
   }
   .header {
-    margin-left: 33.3%
   }
   p {
-    padding: 20px 0 20px 0 !important;
+    padding: 10px 0 10px 10px !important;
   }
   h1 {
-    padding: 20px 0 20px 0 !important;
+    padding: 0;
     font-size: 1.2em !important;
     letter-spacing: 0;
   }
@@ -124,15 +127,16 @@ body {
 }
 
 .image-box {
-    height: 15em;
+    height: 20em;
     margin-bottom: 2em;
     padding: 3em 0;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     background-color: #5e616c;
-    background-image: url("https://wallpaperaccess.com/full/3850473.jpg");
-    background-blend-mode: multiply;
+    background-image: url("assets/home_image.png");
+    background-blend-mode: overlay;
+    margin-left: 10px;
 
 }
 
@@ -181,7 +185,7 @@ h1 .name-title{
 h1 {
     padding-bottom: 0;
     margin-bottom: none;
-    font-size: 20px;
+    font-size: 25px;
     font-weight: bold;
     padding-left: 10px;
     margin-top: 20px;
