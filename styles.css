@@ -372,3 +372,8 @@ figcaption span {
   display: table;
   clear: both;
 }
+
+.cv-year {
+    font-size: 14px;
+    float: right;
+}
