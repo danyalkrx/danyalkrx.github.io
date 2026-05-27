@@ -9,19 +9,17 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-  <!-- FAVICON (browser tab icon) -->
+<!-- FAVICON -->
 <link rel="icon" type="image/png" href="/artists/logo.png">
-
-<!-- OPTIONAL: better support across devices -->
 <link rel="apple-touch-icon" href="/artists/logo.png">
 
-  <!-- OPEN GRAPH (Discord, iMessage, WhatsApp, LinkedIn previews) -->
+<!-- OPEN GRAPH -->
 <meta property="og:title" content="Triple Crown Media Group">
 <meta property="og:description" content="Toronto-based music distribution, publishing, and artist development.">
 <meta property="og:image" content="/artists/logo.png">
 <meta property="og:type" content="website">
 
-<!-- TWITTER/X PREVIEW -->
+<!-- TWITTER -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Triple Crown Media Group">
 <meta name="twitter:description" content="Toronto-based music distribution, publishing, and artist development.">
@@ -44,7 +42,6 @@ body {
   overflow-x: hidden;
 }
 
-/* grain */
 body::before {
   content: "";
   position: fixed;
@@ -62,8 +59,6 @@ body::before {
   inset: 0;
   z-index: -1;
 
-cursor: crosshair;
-
   background:
     radial-gradient(circle at 20% 10%, rgba(255,255,255,0.025), transparent 55%),
     radial-gradient(circle at 80% 90%, rgba(120,140,255,0.015), transparent 65%),
@@ -80,15 +75,7 @@ header {
 
   backdrop-filter: blur(14px);
   background: rgba(5,4,4,0.82);
-
   border-bottom: 1px solid rgba(255,255,255,0.06);
-
-  animation: headerFade 0.8s ease-out;
-}
-
-@keyframes headerFade {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
 }
 
 .container {
@@ -110,8 +97,6 @@ header {
   display: flex;
   align-items: center;
   gap: 18px;
-
-  animation: fadeUp 0.9s ease-out;
 }
 
 .brand img {
@@ -124,13 +109,6 @@ header {
   letter-spacing: 0.38em;
   text-transform: uppercase;
   font-weight: 900;
-
-  animation: textGlow 6s ease-in-out infinite;
-}
-
-@keyframes textGlow {
-  0%, 100% { text-shadow: 0 0 0px rgba(255,255,255,0); }
-  50% { text-shadow: 0 0 18px rgba(255,255,255,0.08); }
 }
 
 .brand-text p {
@@ -158,14 +136,11 @@ header {
   font-weight: 700;
 
   transition: 0.2s ease;
-
-  animation: fadeUp 1s ease-out;
 }
 
 .login-btn:hover {
   background: white;
   color: black;
-  transform: translateY(-2px);
 }
 
 /* ---------------- HERO ---------------- */
@@ -184,16 +159,6 @@ header {
   align-items: center;
 }
 
-/* stagger animation */
-.hero-grid > div:first-child {
-  animation: fadeUp 1.1s ease-out;
-}
-
-.hero-grid > div:last-child {
-  animation: fadeUp 1.3s ease-out;
-}
-
-/* tag */
 .tag {
   display: inline-block;
   border: 1px solid rgba(255,255,255,0.1);
@@ -207,11 +172,9 @@ header {
   color: rgba(255,255,255,0.6);
 
   margin-bottom: 30px;
-
-  animation: fadeUp 1s ease-out;
 }
 
-/* HERO TEXT */
+/* VINYL TEXT FEEL */
 
 .hero h2 {
   font-size: clamp(4.2rem, 8.5vw, 7.5rem);
@@ -219,26 +182,22 @@ header {
   font-weight: 900;
   text-transform: uppercase;
 
-  letter-spacing: -0.02em;
-
+  letter-spacing: -0.03em;
   margin-bottom: 28px;
 
-  transition: transform 0.4s ease;
+  color: rgba(245,245,245,0.88);
 
-  animation: fadeUp 1.1s ease-out;
-}
-
-.hero h2:hover {
-  transform: translateY(-4px);
+  text-shadow:
+    0 1px 0 rgba(0,0,0,0.9),
+    0 2px 8px rgba(0,0,0,0.6),
+    0 0 1px rgba(255,255,255,0.05);
 }
 
 .hero p {
   max-width: 650px;
-  color: rgba(255,255,255,0.62);
+  color: rgba(220,220,220,0.65);
   line-height: 1.95;
   font-size: 1.08rem;
-
-  animation: fadeUp 1.2s ease-out;
 }
 
 /* ---------------- LOGO ---------------- */
@@ -246,43 +205,21 @@ header {
 .logo-background {
   position: relative;
   min-height: 760px;
-
-  animation: fadeUp 1.3s ease-out;
 }
 
 .logo-background img {
   position: absolute;
-  inset: 40px;
+  inset: 0;
 
-  height: 700px;
+  width: 130%;
+  height: 100%;
   object-fit: contain;
 
-  opacity: 0.9;
+  opacity: 0.72;
 
   transform: scale(1.15);
 
   filter: contrast(1.05) brightness(0.92);
-
-  animation: float 6s ease-in-out infinite;
-}
-
-/* subtle floating motion */
-@keyframes float {
-  0%, 100% { transform: scale(1.15) translateY(0px); }
-  50% { transform: scale(1.15) translateY(-8px); }
-}
-
-/* ---------------- GLOBAL ANIMATION ---------------- */
-
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(18px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 /* ---------------- FOOTER ---------------- */
@@ -299,31 +236,90 @@ footer {
   font-size: 0.72rem;
 }
 
-/* ---------------- SCROLL MOTION ---------------- */
-
-.hero {
-  transform: translateZ(0);
-}
-
 /* ---------------- MOBILE ---------------- */
 
 @media (max-width: 980px) {
 
+  .hero {
+    padding: 120px 0 60px;
+    align-items: flex-start;
+  }
+
   .hero-grid {
     grid-template-columns: 1fr;
-    gap: 50px;
+    gap: 38px;
   }
 
   .hero h2 {
-    font-size: 3.8rem;
+    font-size: 3.4rem;
+    line-height: 0.95;
+    margin-bottom: 18px;
+  }
+
+  .hero p {
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+
+  .tag {
+    font-size: 0.62rem;
+    letter-spacing: 0.22em;
+    margin-bottom: 18px;
   }
 
   .logo-background {
-    min-height: 420px;
+    min-height: 320px;
+  }
+
+  .logo-background img {
+    inset: 0;
+    transform: scale(1.05);
+  }
+
+  .brand img {
+    height: 48px;
   }
 
   .brand-text p {
     display: none;
+  }
+
+  .login-btn {
+    padding: 10px 16px;
+    font-size: 0.65rem;
+  }
+  
+  /* center all hero text */
+  .hero-grid > div:first-child {
+    text-align: center;
+  }
+
+  /* center tag properly */
+  .tag {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* center paragraph block */
+  .hero p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* center logo container */
+  .logo-background {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* override absolute positioning for cleaner centering */
+  .logo-background img {
+    position: relative;
+    inset: auto;
+    width: 75%;
+    height: auto;
+    transform: scale(1.05);
   }
 
 }
@@ -377,7 +373,6 @@ footer {
     <div class="logo-background">
       <img src="/artists/logo-transparent.png" />
     </div>
-
 
   </div>
 
