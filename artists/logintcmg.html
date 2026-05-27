@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Artist Login | Triple Crown Media Group</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<link rel="icon" type="image/png" href="/artists/logo.png">
+<link rel="apple-touch-icon" href="/artists/logo.png">
+
+<style>
+
+/* ---------------- BASE ---------------- */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: radial-gradient(circle at 50% 30%, #0b0a09 0%, #050404 55%, #020202 100%);
+  color: rgba(255,255,255,0.92);
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+  opacity: 0.04;
+  pointer-events: none;
+}
+
+/* ---------------- BACKGROUND ---------------- */
+
+.background-glow {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+
+  background:
+    radial-gradient(circle at 30% 20%, rgba(255,255,255,0.03), transparent 60%),
+    radial-gradient(circle at 70% 80%, rgba(120,140,255,0.02), transparent 65%),
+    linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.85));
+}
+
+/* ---------------- HEADER (MATCH MAIN SITE) ---------------- */
+
+header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+
+  backdrop-filter: blur(14px);
+  background: rgba(5,4,4,0.82);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.container {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 0;
+}
+
+/* BRAND (CLICKABLE) */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.brand img {
+  height: 70px;
+  opacity: 0.95;
+}
+
+.brand-text h1 {
+  font-size: 1rem;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  font-weight: 900;
+}
+
+.brand-text p {
+  margin-top: 4px;
+  color: rgba(255,255,255,0.42);
+  text-transform: uppercase;
+  letter-spacing: 0.26em;
+  font-size: 0.68rem;
+}
+
+/* ---------------- LOGIN LAYOUT ---------------- */
+
+.login-wrap {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 120px;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 420px;
+
+  padding: 38px;
+
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(10,8,7,0.55);
+  backdrop-filter: blur(18px);
+
+  box-shadow:
+    0 20px 80px rgba(0,0,0,0.6),
+    inset 0 0 0 1px rgba(255,255,255,0.02);
+}
+
+.login-title {
+  text-transform: uppercase;
+  letter-spacing: 0.35em;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+input {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 14px;
+
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+
+  color: rgba(255,255,255,0.9);
+
+  outline: none;
+  font-size: 0.95rem;
+}
+
+input:focus {
+  border-color: rgba(255,255,255,0.25);
+}
+
+.login-btn {
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.02);
+  color: rgba(255,255,255,0.9);
+  padding: 13px 22px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.72rem;
+  font-weight: 700;
+  transition: 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-btn:hover {
+  background: white;
+  color: black;
+}
+
+
+button {
+  width: 100%;
+  margin-top: 10px;
+
+  padding: 14px;
+
+  border-radius: 999px;
+
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.04);
+
+  color: white;
+
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+
+  font-weight: 800;
+  font-size: 0.75rem;
+
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+button:hover {
+  background: white;
+  color: black;
+}
+
+.note {
+  margin-top: 16px;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  text-align: center;
+}
+
+/* ---------------- MOBILE ---------------- */
+
+@media (max-width: 600px) {
+
+  .login-card {
+    padding: 28px;
+  }
+
+  .brand img {
+    height: 48px;
+  }
+
+  .brand-text p {
+    display: none;
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<div class="background-glow"></div>
+
+<header>
+  <div class="container nav">
+
+    <!-- LOGO + TEXT NOW LINKS HOME -->
+    <a class="brand" href="testtcmg.html">
+      <img src="/artists/logo-transparent.png" />
+      <div class="brand-text">
+        <h1>Triple Crown</h1>
+        <p>Media Group</p>
+      </div>
+    </a>
+
+    <a class="login-btn" href="logintcmg.html">Artist Login</a>
+
+  </div>
+</header>
+
+<div class="login-wrap">
+
+  <div class="login-card">
+
+    <div class="login-title">Artist Portal Access</div>
+
+    <form>
+      <input type="text" placeholder="Username" />
+      <input type="password" placeholder="Password" />
+      <button type="submit">Login</button>
+    </form>
+
+    <div class="note">
+      Triple Crown Media Group
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>
