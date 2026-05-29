@@ -540,6 +540,11 @@ body::before{
     overflow-x:auto;
   }
 
+  .y-axis text{
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.05em;
+}
+
 }
 
 </style>
@@ -658,6 +663,24 @@ body::before{
       <div class="chart-tooltip" id="tooltip"></div>
 
       <svg viewBox="0 0 700 280" preserveAspectRatio="none">
+
+
+        <g class="y-axis">
+
+  <!-- axis line -->
+  <line x1="40" y1="20" x2="40" y2="280"
+        stroke="rgba(255,255,255,0.12)"
+        stroke-width="1"/>
+
+  <!-- labels -->
+  <text x="10" y="50" fill="rgba(255,255,255,0.4)" font-size="10">500K</text>
+  <text x="10" y="100" fill="rgba(255,255,255,0.4)" font-size="10">400K</text>
+  <text x="10" y="150" fill="rgba(255,255,255,0.4)" font-size="10">300K</text>
+  <text x="10" y="200" fill="rgba(255,255,255,0.4)" font-size="10">200K</text>
+  <text x="10" y="250" fill="rgba(255,255,255,0.4)" font-size="10">100K</text>
+
+</g>
+
 
         <!-- AREA (YOUR ORIGINAL GRAPH) -->
         <path
