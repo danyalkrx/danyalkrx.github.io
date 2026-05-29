@@ -256,19 +256,23 @@ button:hover {
 </head>
 
 <script>
-document.getElementById("loginForm").addEventListener("submit", function(e) {
-  e.preventDefault(); // stop form from refreshing page
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("loginForm");
 
-  const username = document.querySelector('input[type="text"]').value;
-  const password = document.querySelector('input[type="password"]').value;
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
 
-if (username === "test" && password === "test") {
-  localStorage.setItem("tcmg_auth", "true");
-  window.location.href = "dashboardtcmg.html";
-}
+    const username = document.querySelector('input[type="text"]').value;
+    const password = document.querySelector('input[type="password"]').value;
+
+    if (username === "test" && password === "test") {
+      window.location.href = "dashboardtcmg.html";
+    } else {
+      alert("Invalid credentials");
+    }
+  });
 });
 </script>
-
 
 <body>
 
