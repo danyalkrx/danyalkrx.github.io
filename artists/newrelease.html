@@ -47,38 +47,6 @@ body::before{
     radial-gradient(circle at 80% 90%, rgba(90,110,255,0.04), transparent 50%);
 }
 
-/* SIDEBAR */
-
-.sidebar{
-  position:fixed;
-  left:0;
-  top:0;
-  width:270px;
-  height:100vh;
-
-  border-right:1px solid rgba(255,255,255,0.06);
-  background:rgba(7,7,7,0.75);
-  backdrop-filter:blur(20px);
-
-  padding:28px 18px;
-
-  display:flex;
-  flex-direction:column;
-
-  z-index:100;
-  transition:0.3s ease;
-}
-
-.sidebar.collapsed{
-  width:96px;
-}
-
-.sidebar-top{
-  display:flex;
-  flex-direction:column;
-  gap:22px;
-}
-
 .brand{
   display:flex;
   align-items:center;
@@ -107,16 +75,6 @@ body::before{
   text-transform:uppercase;
   opacity:0.45;
   margin-top:4px;
-}
-
-.sidebar.collapsed .brand{
-  justify-content:center;
-}
-
-.sidebar.collapsed .brand-text{
-  opacity:0;
-  width:0;
-  overflow:hidden;
 }
 
 .nav-links{
@@ -166,12 +124,6 @@ body::before{
   text-transform:uppercase;
   white-space:nowrap;
   transition:0.2s ease;
-}
-
-.sidebar.collapsed .nav-label{
-  opacity:0;
-  width:0;
-  overflow:hidden;
 }
 
 .collapse-btn{
@@ -344,10 +296,6 @@ input[type="date"]{
 
 @media(max-width:1100px){
 
-  .sidebar{
-    transform:translateX(-100%);
-  }
-
   .main,
   .main.expanded{
     margin-left:0;
@@ -513,66 +461,11 @@ input[type="date"]{
 
 </main>
 
-<script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 
-let sidebar, main, collapseBtn;
+<script src="/artists/dashboard.js"></script>
 
-/* =========================
-   INIT AFTER SIDEBAR LOAD
-========================= */
-function initSidebar() {
-
-  sidebar = document.getElementById("sidebar");
-  main = document.getElementById("main");
-  collapseBtn = document.getElementById("collapseBtn");
-
-  const mobileToggle = document.getElementById("mobileToggle");
-  const overlay = document.getElementById("overlay");
-
-  function openSidebar(){
-    sidebar.classList.add("open");
-    overlay.classList.add("active");
-  }
-
-  function closeSidebar(){
-    sidebar.classList.remove("open");
-    overlay.classList.remove("active");
-  }
-
-  collapseBtn.addEventListener("click", () => {
-
-    if (window.innerWidth <= 1100) {
-      closeSidebar();
-      return;
-    }
-
-    sidebar.classList.toggle("collapsed");
-    main.classList.toggle("expanded");
-  });
-
-  mobileToggle.addEventListener("click", () => {
-    sidebar.classList.contains("open") ? closeSidebar() : openSidebar();
-  });
-
-  overlay.addEventListener("click", closeSidebar);
-
-  document.querySelectorAll(".nav-item").forEach(item => {
-    item.addEventListener("click", closeSidebar);
-  });
-
-}
-
-/* =========================
-   LOAD SIDEBAR
-========================= */
-fetch("sidebar.html")
-  .then(res => res.text())
-  .then(html => {
-    document.getElementById("sidebar-container").innerHTML = html;
-    initSidebar();
-  });
-
-</script>
 
 </body>
 </html>

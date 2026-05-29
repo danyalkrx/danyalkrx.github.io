@@ -35,32 +35,6 @@ body::before{
   pointer-events:none;
 }
 
-/* SIDEBAR */
-
-.sidebar{
-  position:fixed;
-  left:0;
-  top:0;
-  width:270px;
-  height:100vh;
-  background:rgba(7,7,7,0.75);
-  backdrop-filter:blur(20px);
-  border-right:1px solid rgba(255,255,255,0.06);
-  padding:28px 18px;
-  display:flex;
-  flex-direction:column;
-  transition:0.3s ease;
-  z-index:100;
-}
-
-.sidebar.collapsed{ width:96px; }
-
-.sidebar-top{
-  display:flex;
-  flex-direction:column;
-  gap:22px;
-}
-
 .brand{
   display:flex;
   align-items:center;
@@ -83,16 +57,6 @@ body::before{
   opacity:0.5;
   letter-spacing:0.2em;
   text-transform:uppercase;
-}
-
-.sidebar.collapsed .brand-text{
-  opacity:0;
-  width:0;
-  overflow:hidden;
-}
-
-.sidebar.collapsed .brand{
-  justify-content:center;
 }
 
 .nav-links{
@@ -126,12 +90,6 @@ body::before{
 .nav-icon{ min-width:24px; display:flex; justify-content:center; }
 
 .nav-label{ transition:0.2s ease; }
-
-.sidebar.collapsed .nav-label{
-  opacity:0;
-  width:0;
-  overflow:hidden;
-}
 
 .collapse-btn{
   width:42px;
@@ -348,7 +306,6 @@ body::before{
 /* MOBILE */
 
 @media(max-width:900px){
-  .sidebar{ display:none; }
 
   .main{
     margin-left:0;
@@ -482,67 +439,10 @@ body::before{
 
 </main>
 
-<script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 
-
-let sidebar, main, collapseBtn;
-
-/* =========================
-   INIT AFTER SIDEBAR LOAD
-========================= */
-function initSidebar() {
-
-  sidebar = document.getElementById("sidebar");
-  main = document.getElementById("main");
-  collapseBtn = document.getElementById("collapseBtn");
-
-  const mobileToggle = document.getElementById("mobileToggle");
-  const overlay = document.getElementById("overlay");
-
-  function openSidebar(){
-    sidebar.classList.add("open");
-    overlay.classList.add("active");
-  }
-
-  function closeSidebar(){
-    sidebar.classList.remove("open");
-    overlay.classList.remove("active");
-  }
-
-  collapseBtn.addEventListener("click", () => {
-
-    if (window.innerWidth <= 1100) {
-      closeSidebar();
-      return;
-    }
-
-    sidebar.classList.toggle("collapsed");
-    main.classList.toggle("expanded");
-  });
-
-  mobileToggle.addEventListener("click", () => {
-    sidebar.classList.contains("open") ? closeSidebar() : openSidebar();
-  });
-
-  overlay.addEventListener("click", closeSidebar);
-
-  document.querySelectorAll(".nav-item").forEach(item => {
-    item.addEventListener("click", closeSidebar);
-  });
-
-}
-
-/* =========================
-   LOAD SIDEBAR
-========================= */
-fetch("sidebar.html")
-  .then(res => res.text())
-  .then(html => {
-    document.getElementById("sidebar-container").innerHTML = html;
-    initSidebar();
-  });
-
-</script>
+<script src="/artists/dashboard.js"></script>
 
 </body>
 </html>

@@ -169,6 +169,85 @@
     width:270px;
   }
 }
+
+@media (max-width: 1100px) {
+  .collapse-btn {
+    opacity: 0;
+    pointer-events: none;
+    height: 0;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+    /* =========================
+   MOBILE SIDEBAR FIX
+========================= */
+
+.mobile-toggle{
+  display:none;
+  position:fixed;
+  bottom:18px;
+  right:18px;
+  z-index:2000;
+
+  width:56px;
+  height:56px;
+
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,0.1);
+  background:rgba(10,10,10,0.85);
+  backdrop-filter:blur(14px);
+
+  color:white;
+  font-size:22px;
+  cursor:pointer;
+
+  box-shadow:0 10px 30px rgba(0,0,0,0.4);
+}
+
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.55);
+  z-index:999;
+
+  opacity:0;
+  pointer-events:none;
+  transition:0.25s ease;
+}
+
+/* sidebar mobile behavior */
+@media (max-width:1100px){
+
+  .mobile-toggle{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  .sidebar{
+    transform:translateX(-100%);
+    transition:0.3s ease;
+    z-index:1000;
+  }
+
+  .sidebar.open{
+    transform:translateX(0);
+  }
+
+  .overlay.active{
+    opacity:1;
+    pointer-events:auto;
+  }
+
+  /* kill desktop collapse behavior on mobile */
+  .sidebar.collapsed{
+    width:270px;
+  }
+}
+
+
 </style>
 
 <aside class="sidebar" id="sidebar">

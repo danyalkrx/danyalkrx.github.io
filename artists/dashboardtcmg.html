@@ -47,39 +47,7 @@ body::before{
     radial-gradient(circle at 80% 90%, rgba(90,110,255,0.04), transparent 50%);
 }
 
-/* SIDEBAR */
-
-.sidebar{
-  position:fixed;
-  left:0;
-  top:0;
-  width:270px;
-  height:100vh;
-
-  border-right:1px solid rgba(255,255,255,0.06);
-  background:rgba(7,7,7,0.75);
-  backdrop-filter:blur(20px);
-
-  padding:28px 18px;
-
-  display:flex;
-  flex-direction:column;
-
-  z-index:100;
-  transition:0.3s ease;
-}
-
-.sidebar.collapsed{
-  width:96px;
-}
-
 /* TOP */
-
-.sidebar-top{
-  display:flex;
-  flex-direction:column;
-  gap:22px;
-}
 
 .brand{
   display:flex;
@@ -110,17 +78,6 @@ body::before{
   text-transform:uppercase;
 }
 
-/* COLLAPSED */
-
-.sidebar.collapsed .brand{
-  justify-content:center;
-}
-
-.sidebar.collapsed .brand-text{
-  opacity:0;
-  width:0;
-  overflow:hidden;
-}
 
 /* NAV */
 
@@ -171,43 +128,6 @@ body::before{
   text-transform:uppercase;
   white-space:nowrap;
   transition:0.2s ease;
-}
-
-.sidebar.collapsed .nav-label{
-  opacity:0;
-  width:0;
-  overflow:hidden;
-}
-
-/* COLLAPSE BUTTON */
-
-.collapse-btn{
-  width:42px;
-  height:42px;
-
-  border:none;
-  border-radius:14px;
-
-  background:rgba(255,255,255,0.05);
-  color:white;
-
-  cursor:pointer;
-
-  font-size:1rem;
-
-  transition:0.2s ease;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  margin-top:auto;
-  align-self:flex-start;
-}
-
-.collapse-btn:hover{
-  background:white;
-  color:black;
 }
 
 /* MAIN */
@@ -491,10 +411,6 @@ body::before{
 
 @media(max-width:1100px){
 
-  .sidebar{
-    transform:translateX(-100%);
-  }
-
   .main,
   .main.expanded{
     margin-left:0;
@@ -548,73 +464,6 @@ body::before{
   letter-spacing: 0.05em;
 }
 
-}
-
-  /* =========================
-   MOBILE SIDEBAR FIX
-========================= */
-
-.mobile-toggle{
-  display:none;
-  position:fixed;
-  bottom:18px;
-  right:18px;
-  z-index:2000;
-
-  width:56px;
-  height:56px;
-
-  border-radius:18px;
-  border:1px solid rgba(255,255,255,0.1);
-  background:rgba(10,10,10,0.85);
-  backdrop-filter:blur(14px);
-
-  color:white;
-  font-size:22px;
-  cursor:pointer;
-
-  box-shadow:0 10px 30px rgba(0,0,0,0.4);
-}
-
-.overlay{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.55);
-  z-index:999;
-
-  opacity:0;
-  pointer-events:none;
-  transition:0.25s ease;
-}
-
-/* sidebar mobile behavior */
-@media (max-width:1100px){
-
-  .mobile-toggle{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-  }
-
-  .sidebar{
-    transform:translateX(-100%);
-    transition:0.3s ease;
-    z-index:1000;
-  }
-
-  .sidebar.open{
-    transform:translateX(0);
-  }
-
-  .overlay.active{
-    opacity:1;
-    pointer-events:auto;
-  }
-
-  /* kill desktop collapse behavior on mobile */
-  .sidebar.collapsed{
-    width:270px;
-  }
 }
 
   .line-chart {
@@ -809,143 +658,7 @@ body::before{
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 
-<script>
-
-let chart;
-
-/* =========================
-   CHART
-========================= */
-
-function loadCSVAndRenderChart() {
-
-  const canvas = document.getElementById("streamChart");
-
-  if (!canvas) {
-    console.error("Chart canvas not found");
-    return;
-  }
-
-  Papa.parse("/artists/streams.csv", {
-    download: true,
-    header: true,
-
-    complete: function(results) {
-
-      const rows = results.data
-        .filter(r => r.date && r.streams)
-        .map(r => ({
-          date: r.date,
-          streams: Number(r.streams)
-        }));
-
-      const labels = rows.map(r => r.date);
-      const data = rows.map(r => r.streams);
-
-      if (chart) chart.destroy(); // prevents duplicate renders
-
-      chart = new Chart(canvas, {
-        type: "line",
-        data: {
-          labels,
-          datasets: [{
-            label: "Streams",
-            data,
-            borderColor: "#9bb2ff",
-            backgroundColor: "rgba(130,150,255,0.15)",
-            fill: true,
-            tension: 0.4,
-            pointRadius: 4,
-            pointBackgroundColor: "#fff",
-            pointBorderColor: "#9bb2ff",
-            pointBorderWidth: 2
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: { display: false }
-          },
-          scales: {
-            x: {
-              grid: { display: false },
-              ticks: { color: "rgba(255,255,255,0.4)" }
-            },
-            y: {
-              min: 0,
-              grid: { color: "rgba(255,255,255,0.06)" },
-              ticks: {
-                color: "rgba(255,255,255,0.4)"
-              }
-            }
-          }
-        }
-      });
-
-    },
-
-    error: function(err) {
-      console.error("CSV load failed:", err);
-    }
-  });
-}
-
-/* =========================
-   SIDEBAR INIT
-========================= */
-
-function initSidebar() {
-
-  const sidebar = document.getElementById("sidebar");
-  const main = document.getElementById("main");
-  const collapseBtn = document.getElementById("collapseBtn");
-
-  const mobileToggle = document.getElementById("mobileToggle");
-  const overlay = document.getElementById("overlay");
-
-  function openSidebar(){
-    sidebar.classList.add("open");
-    overlay.classList.add("active");
-  }
-
-  function closeSidebar(){
-    sidebar.classList.remove("open");
-    overlay.classList.remove("active");
-  }
-
-  collapseBtn?.addEventListener("click", () => {
-    sidebar.classList.toggle("collapsed");
-    main.classList.toggle("expanded");
-  });
-
-  mobileToggle?.addEventListener("click", () => {
-    sidebar.classList.contains("open") ? closeSidebar() : openSidebar();
-  });
-
-  overlay?.addEventListener("click", closeSidebar);
-
-  document.querySelectorAll(".nav-item").forEach(item => {
-    item.addEventListener("click", closeSidebar);
-  });
-
-  // IMPORTANT: wait until DOM is fully ready
-  loadCSVAndRenderChart();
-}
-
-/* =========================
-   LOAD SIDEBAR THEN START
-========================= */
-
-fetch("sidebar.html")
-  .then(res => res.text())
-  .then(html => {
-    document.getElementById("sidebar-container").innerHTML = html;
-    initSidebar();
-  })
-  .catch(err => console.error("Sidebar failed:", err));
-
-</script>
+<script src="/artists/dashboard.js"></script>
 
 </body>
 </html>
