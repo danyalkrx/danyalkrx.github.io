@@ -349,13 +349,34 @@ body::before{
 
 @media(max-width:900px){
   .sidebar{ display:none; }
-  .main{ margin-left:0; padding:22px; }
-  .release-grid{ grid-template-columns:1fr; }
+
+  .main{
+    margin-left:0;
+    padding:22px;
+  }
+
+  .release-grid{
+    grid-template-columns:1fr;
+  }
 
   .smart-links{
     opacity:1;
     transform:none;
   }
+
+  .topbar{
+    gap:14px;
+    align-items:flex-start;
+  }
+
+  .new-btn{
+    padding:12px 18px;
+    font-size:1rem;
+    border-radius:14px;
+    letter-spacing:0.1em;
+    white-space:nowrap;
+  }
+
 }
 
 </style>
