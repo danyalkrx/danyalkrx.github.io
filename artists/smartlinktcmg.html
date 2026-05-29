@@ -8,7 +8,6 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <link rel="icon" type="image/png" href="/artists/logo.png">
@@ -20,42 +19,54 @@
 
 <style>
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+/* RESET + MOBILE FIX */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-body{
-  font-family:'Inter',sans-serif;
+html, body {
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  color: rgba(255,255,255,0.94);
+  overflow-x: hidden;
+  background: #040404;
+}
+
+/* FIXED BACKGROUND LAYERS (FULL BLEED SAFE) */
+body::before {
+  content: "";
+  position: fixed;
+  inset: -40px;
   background:
     radial-gradient(circle at top left, rgba(90,90,255,0.12), transparent 30%),
     radial-gradient(circle at bottom right, rgba(255,255,255,0.06), transparent 40%),
-    #040404;
-  color:rgba(255,255,255,0.94);
-  overflow-x:hidden;
+    url("https://grainy-gradients.vercel.app/noise.svg");
+  background-blend-mode: screen;
+  opacity: 0.08;
+  pointer-events: none;
+  z-index: -3;
 }
 
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  background-image:url("https://grainy-gradients.vercel.app/noise.svg");
-  opacity:0.045;
-  pointer-events:none;
-}
-
-.background-glow{
-  position:fixed;
-  inset:0;
-  z-index:-1;
+.background-glow {
+  position: fixed;
+  inset: -80px;
+  z-index: -2;
   background:
-    radial-gradient(circle at 50% 20%, rgba(255,255,255,0.04), transparent 40%),
-    radial-gradient(circle at 80% 80%, rgba(80,110,255,0.08), transparent 45%);
+    radial-gradient(circle at 50% 20%, rgba(255,255,255,0.05), transparent 45%),
+    radial-gradient(circle at 80% 80%, rgba(80,110,255,0.10), transparent 55%);
+  filter: blur(40px);
+  pointer-events: none;
 }
 
 /* HEADER */
-
 header {
   position: fixed;
   width: 100%;
@@ -66,317 +77,210 @@ header {
   border-bottom: 1px solid rgba(255,255,255,0.06);
 }
 
-.container{
-  width:100%;
-  max-width:1280px;
-  margin:0 auto;
-  padding:0 28px;
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 28px;
 }
 
-.nav{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:20px 0;
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0;
 }
 
-.brand{
-  display:flex;
-  align-items:center;
-  gap:16px;
-  text-decoration:none;
-  color:white;
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-decoration: none;
+  color: white;
 }
 
-.brand img{
-  width:70px;
-  opacity:0.95;
+.brand img {
+  width: 70px;
+  opacity: 0.95;
 }
 
-.brand-text h1{
-  font-size:0.95rem;
-  font-weight:900;
-  letter-spacing:0.35em;
-  text-transform:uppercase;
+.brand-text h1 {
+  font-size: 0.95rem;
+  font-weight: 900;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
 }
 
-.brand-text p{
-  font-size:0.65rem;
-  letter-spacing:0.24em;
-  text-transform:uppercase;
-  opacity:0.45;
-  margin-top:4px;
+.brand-text p {
+  font-size: 0.65rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  opacity: 0.45;
+  margin-top: 4px;
 }
 
-.home-btn{
-  text-decoration:none;
-  color:white;
-  border:1px solid rgba(255,255,255,0.12);
-  padding:12px 20px;
-  border-radius:999px;
-  font-size:0.7rem;
-  text-transform:uppercase;
-  letter-spacing:0.2em;
-  transition:0.25s ease;
-  font-weight:700;
+.home-btn {
+  text-decoration: none;
+  color: white;
+  border: 1px solid rgba(255,255,255,0.12);
+  padding: 12px 20px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  transition: 0.25s ease;
+  font-weight: 700;
 }
 
-.home-btn:hover{
-  background:white;
-  color:black;
+.home-btn:hover {
+  background: white;
+  color: black;
 }
 
-/* MAIN */
-
-.hero{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  padding:140px 0 80px;
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 140px 0 80px;
 }
 
-.hero-grid{
-  display:grid;
-  grid-template-columns:520px 1fr;
-  gap:90px;
-  align-items:center;
+.hero-grid {
+  display: grid;
+  grid-template-columns: 520px 1fr;
+  gap: 90px;
+  align-items: center;
 }
 
 /* COVER */
-
-.cover-wrapper{
-  position:relative;
+.cover-wrapper {
+  position: relative;
 }
 
-.cover-glow{
-  position:absolute;
-  inset:-40px;
-  background:radial-gradient(circle, rgba(255,255,255,0.12), transparent 70%);
-  filter:blur(60px);
-  z-index:-1;
+.cover-glow {
+  position: absolute;
+  inset: -80px;
+  background: radial-gradient(circle, rgba(255,255,255,0.12), transparent 70%);
+  filter: blur(70px);
+  z-index: -1;
 }
 
-.cover-art{
-  width:100%;
-  border-radius:32px;
-  overflow:hidden;
-  border:1px solid rgba(255,255,255,0.08);
+.cover-art {
+  width: 100%;
+  border-radius: 32px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.08);
   box-shadow:
     0 20px 60px rgba(0,0,0,0.65),
     0 0 0 1px rgba(255,255,255,0.02);
 }
 
-.cover-art img{
-  width:100%;
-  display:block;
+.cover-art img {
+  width: 100%;
+  display: block;
 }
 
 /* INFO */
-
-.release-tag{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  padding:10px 18px;
-  border-radius:999px;
-  border:1px solid rgba(255,255,255,0.1);
-  color:rgba(255,255,255,0.6);
-  font-size:0.7rem;
-  letter-spacing:0.25em;
-  text-transform:uppercase;
-  margin-bottom:28px;
+.artist {
+  font-size: 1rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  opacity: 0.5;
+  margin-bottom: 18px;
+  font-weight: 700;
 }
 
-.artist{
-  font-size:1rem;
-  letter-spacing:0.35em;
-  text-transform:uppercase;
-  opacity:0.5;
-  margin-bottom:18px;
-  font-weight:700;
+.title {
+  font-size: clamp(4rem, 9vw, 7rem);
+  line-height: 0.9;
+  text-transform: uppercase;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  margin-bottom: 26px;
+  color: rgba(245,245,245,0.92);
 }
 
-.title{
-  font-size:clamp(4rem, 9vw, 7rem);
-  line-height:0.9;
-  text-transform:uppercase;
-  font-weight:900;
-  letter-spacing:-0.04em;
-  margin-bottom:26px;
-  color:rgba(245,245,245,0.92);
-  text-shadow:
-    0 4px 20px rgba(0,0,0,0.7);
+.description {
+  max-width: 620px;
+  line-height: 1.9;
+  font-size: 1.05rem;
+  color: rgba(255,255,255,0.62);
+  margin-bottom: 42px;
 }
 
-.description{
-  max-width:620px;
-  line-height:1.9;
-  font-size:1.05rem;
-  color:rgba(255,255,255,0.62);
-  margin-bottom:42px;
+/* PLATFORMS */
+.platforms {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(180px,1fr));
+  gap: 18px;
+  max-width: 520px;
 }
 
-/* BUTTONS */
-
-.platforms{
-  display:grid;
-  grid-template-columns:repeat(2, minmax(180px,1fr));
-  gap:18px;
-  max-width:520px;
+.platform-btn {
+  text-decoration: none;
+  color: white;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.03);
+  padding: 18px 22px;
+  border-radius: 24px;
+  display: flex;
+  justify-content: space-between;
+  transition: 0.25s ease;
+  backdrop-filter: blur(10px);
 }
 
-.platform-btn{
-  text-decoration:none;
-  color:white;
-  border:1px solid rgba(255,255,255,0.08);
-  background:rgba(255,255,255,0.03);
-  padding:18px 22px;
-  border-radius:24px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  transition:0.25s ease;
-  backdrop-filter:blur(10px);
-}
-
-.platform-btn:hover{
-  transform:translateY(-4px);
-  background:white;
-  color:black;
-}
-
-.platform-left{
-  display:flex;
-  align-items:center;
-  gap:14px;
-}
-
-.platform-icon{
-  width:42px;
-  height:42px;
-  border-radius:14px;
-  background:rgba(255,255,255,0.08);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:1rem;
-  font-weight:800;
-}
-
-.platform-name{
-  display:flex;
-  flex-direction:column;
-}
-
-.platform-name strong{
-  font-size:0.9rem;
-  letter-spacing:-0.02em;
-}
-
-.platform-name span{
-  font-size:0.68rem;
-  text-transform:uppercase;
-  letter-spacing:0.18em;
-  opacity:0.55;
-  margin-top:3px;
-}
-
-.arrow{
-  font-size:1rem;
-  opacity:0.5;
+.platform-btn:hover {
+  transform: translateY(-4px);
+  background: white;
+  color: black;
 }
 
 /* FOOTER */
-
-footer{
-  padding:34px;
-  border-top:1px solid rgba(255,255,255,0.06);
-  text-align:center;
-  color:rgba(255,255,255,0.38);
-  font-size:0.72rem;
-  text-transform:uppercase;
-  letter-spacing:0.22em;
+footer {
+  padding: 34px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  text-align: center;
+  color: rgba(255,255,255,0.38);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
 }
 
 /* MOBILE */
+@media (max-width: 980px) {
 
-@media (max-width:980px){
+  header { display: none; }
 
-  /* REMOVE HEADER */
-  header{
-    display:none;
+  .hero {
+    padding: 40px 0 70px;
+    min-height: auto;
   }
 
-  .hero{
-    padding:40px 0 70px;
-    min-height:auto;
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 42px;
+    text-align: center;
   }
 
-  .hero-grid{
-    grid-template-columns:1fr;
-    gap:42px;
-    text-align:center;
-    width: 100%;
+  .cover-art {
+    width: 92vw;
+    margin: 0 auto;
   }
 
-  /* MUCH LARGER COVER ART */
-  .cover-wrapper{
-    width:100%;
-    max-width:none;
-    margin:0 auto;
+  .cover-glow {
+    inset: -120px;
+    filter: blur(90px);
   }
 
-  .cover-art{
-    width:92vw;
-    margin:0 auto;
-    border-radius:28px;
+  .title {
+    font-size: 4.2rem;
   }
 
-  .cover-art img{
-    width:100%;
-    display:block;
+  .platforms {
+    grid-template-columns: 1fr;
+    max-width: 92vw;
+    margin: 0 auto;
   }
-
-  .cover-glow{
-    inset:-20px;
-    filter:blur(45px);
-  }
-
-  .release-tag{
-    margin-left:auto;
-    margin-right:auto;
-    font-size:0.62rem;
-  }
-
-  .artist{
-    font-size:0.85rem;
-    letter-spacing:0.3em;
-  }
-
-  .title{
-    font-size:4.2rem;
-    line-height:0.9;
-  }
-
-  .description{
-    margin-left:auto;
-    margin-right:auto;
-    max-width:92%;
-    font-size:1rem;
-    line-height:1.8;
-  }
-
-  .platforms{
-    grid-template-columns:1fr;
-    width:100%;
-    max-width:92vw;
-    margin:0 auto;
-  }
-
-  .platform-btn{
-    padding:20px 22px;
-  }
-
 }
 
 </style>
@@ -387,144 +291,49 @@ footer{
 <div class="background-glow"></div>
 
 <header>
-
   <div class="container nav">
-
     <a class="brand" href="testtcmg.html">
-
       <img src="/artists/logo-transparent.png" alt="Triple Crown">
-
       <div class="brand-text">
         <h1>Triple Crown</h1>
         <p>Media Group</p>
       </div>
-
     </a>
 
     <a class="home-btn" href="logintcmg.html">
       Artist Login
     </a>
-
   </div>
-
 </header>
 
 <section class="hero">
-
   <div class="container hero-grid">
 
-    <!-- COVER -->
-
     <div class="cover-wrapper">
-
       <div class="cover-glow"></div>
-
       <div class="cover-art">
         <img src="/artists/takecare.jpg" alt="Take Care Cover Art">
       </div>
-
     </div>
 
-    <!-- INFO -->
-
     <div>
+      <div class="artist">Drake</div>
 
-      <div class="artist">
-        Drake
-      </div>
-
-      <h1 class="title">
-        Take Care
-      </h1>
+      <h1 class="title">Take Care</h1>
 
       <p class="description">
         Stream “Take Care” now on all major platforms.
       </p>
 
       <div class="platforms">
-
-        <a class="platform-btn" href="#" target="_blank">
-
-          <div class="platform-left">
-
-            <div class="platform-icon">
-              ♫
-            </div>
-
-            <div class="platform-name">
-              <strong>Spotify</strong>
-              <span>Listen Now</span>
-            </div>
-
-          </div>
-
-          <div class="arrow">↗</div>
-
-        </a>
-
-        <a class="platform-btn" href="#" target="_blank">
-
-          <div class="platform-left">
-
-            <div class="platform-icon">
-              
-            </div>
-
-            <div class="platform-name">
-              <strong>Apple Music</strong>
-              <span>Stream</span>
-            </div>
-
-          </div>
-
-          <div class="arrow">↗</div>
-
-        </a>
-
-        <a class="platform-btn" href="#" target="_blank">
-
-          <div class="platform-left">
-
-            <div class="platform-icon">
-              ▶
-            </div>
-
-            <div class="platform-name">
-              <strong>YouTube Music</strong>
-              <span>Watch & Listen</span>
-            </div>
-
-          </div>
-
-          <div class="arrow">↗</div>
-
-        </a>
-
-        <a class="platform-btn" href="#" target="_blank">
-
-          <div class="platform-left">
-
-            <div class="platform-icon">
-              ♪
-            </div>
-
-            <div class="platform-name">
-              <strong>SoundCloud</strong>
-              <span>Play Track</span>
-            </div>
-
-          </div>
-
-          <div class="arrow">↗</div>
-
-        </a>
-
+        <a class="platform-btn" href="#">Spotify</a>
+        <a class="platform-btn" href="#">Apple Music</a>
+        <a class="platform-btn" href="#">YouTube Music</a>
+        <a class="platform-btn" href="#">SoundCloud</a>
       </div>
-
     </div>
 
   </div>
-
 </section>
 
 <footer>
