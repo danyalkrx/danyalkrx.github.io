@@ -349,7 +349,6 @@ body::before{
   position:relative;
   height:280px;
   margin-top:34px;
-  border-radius:24px;
   overflow:hidden;
 }
 
@@ -618,6 +617,15 @@ body::before{
   }
 }
 
+  .line-chart {
+  height: 280px;
+}
+
+#lineChart, canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
 
 </style>
 </head>
@@ -698,80 +706,9 @@ body::before{
         <p>Last 7 Days</p>
       </div>
 
-    <div class="line-chart">
-
-      <div class="chart-tooltip" id="tooltip"></div>
-
-      <svg viewBox="0 0 700 280" preserveAspectRatio="none">
-
-
-        <g class="y-axis">
-
-  <!-- axis line -->
-  <line x1="40" y1="20" x2="40" y2="280"
-        stroke="rgba(255,255,255,0.12)"
-        stroke-width="1"/>
-
-  <!-- labels -->
-  <text x="10" y="50" fill="rgba(255,255,255,0.4)" font-size="10">500K</text>
-  <text x="10" y="100" fill="rgba(255,255,255,0.4)" font-size="10">400K</text>
-  <text x="10" y="150" fill="rgba(255,255,255,0.4)" font-size="10">300K</text>
-  <text x="10" y="200" fill="rgba(255,255,255,0.4)" font-size="10">200K</text>
-  <text x="10" y="250" fill="rgba(255,255,255,0.4)" font-size="10">100K</text>
-
-</g>
-
-
-        <!-- AREA (YOUR ORIGINAL GRAPH) -->
-        <path
-          d="
-          M 40 215
-          C 90 205, 120 185, 160 175
-          C 210 160, 240 145, 280 140
-          C 330 135, 360 118, 400 105
-          C 450 90, 480 72, 520 68
-          C 570 64, 610 48, 660 42
-          L 660 280 L 40 280 Z
-          "
-          fill="rgba(130,150,255,0.15)"
-        />
-
-        <!-- LINE (YOUR ORIGINAL GRAPH) -->
-        <path
-          class="chart-line"
-          d="
-          M 40 215
-          C 90 205, 120 185, 160 175
-          C 210 160, 240 145, 280 140
-          C 330 135, 360 118, 400 105
-          C 450 90, 480 72, 520 68
-          C 570 64, 610 48, 660 42
-          "
-        />
-
-        <!-- POINTS -->
-        <circle class="chart-point" cx="40" cy="215" r="6" data-value="120K"></circle>
-        <circle class="chart-point" cx="160" cy="175" r="6" data-value="180K"></circle>
-        <circle class="chart-point" cx="280" cy="140" r="6" data-value="240K"></circle>
-        <circle class="chart-point" cx="400" cy="105" r="6" data-value="310K"></circle>
-        <circle class="chart-point" cx="520" cy="68" r="6" data-value="420K"></circle>
-        <circle class="chart-point" cx="660" cy="42" r="6" data-value="500K"></circle>
-
-      </svg>
-
-    </div>
-
-      <div class="chart-labels">
-
-        <span>22-05-2026</span>
-        <span>23-05-2026</span>
-        <span>24-05-2026</span>
-        <span>25-05-2026</span>
-        <span>26-05-2026</span>
-        <span>27-05-2026</span>
-        <span>28-05-2026</span>
-
-      </div>
+<div class="line-chart">
+  <canvas id="streamChart"></canvas>
+</div>
 
     </div>
 
@@ -869,18 +806,100 @@ body::before{
 
 </main>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
 <script>
 
-let sidebar, main, collapseBtn;
+let chart;
 
 /* =========================
-   INIT AFTER SIDEBAR LOAD
+   CHART
 ========================= */
+
+function loadCSVAndRenderChart() {
+
+  const canvas = document.getElementById("streamChart");
+
+  if (!canvas) {
+    console.error("Chart canvas not found");
+    return;
+  }
+
+  Papa.parse("/artists/streams.csv", {
+    download: true,
+    header: true,
+
+    complete: function(results) {
+
+      const rows = results.data
+        .filter(r => r.date && r.streams)
+        .map(r => ({
+          date: r.date,
+          streams: Number(r.streams)
+        }));
+
+      const labels = rows.map(r => r.date);
+      const data = rows.map(r => r.streams);
+
+      if (chart) chart.destroy(); // prevents duplicate renders
+
+      chart = new Chart(canvas, {
+        type: "line",
+        data: {
+          labels,
+          datasets: [{
+            label: "Streams",
+            data,
+            borderColor: "#9bb2ff",
+            backgroundColor: "rgba(130,150,255,0.15)",
+            fill: true,
+            tension: 0.4,
+            pointRadius: 4,
+            pointBackgroundColor: "#fff",
+            pointBorderColor: "#9bb2ff",
+            pointBorderWidth: 2
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false }
+          },
+          scales: {
+            x: {
+              grid: { display: false },
+              ticks: { color: "rgba(255,255,255,0.4)" }
+            },
+            y: {
+              min: 0,
+              grid: { color: "rgba(255,255,255,0.06)" },
+              ticks: {
+                color: "rgba(255,255,255,0.4)"
+              }
+            }
+          }
+        }
+      });
+
+    },
+
+    error: function(err) {
+      console.error("CSV load failed:", err);
+    }
+  });
+}
+
+/* =========================
+   SIDEBAR INIT
+========================= */
+
 function initSidebar() {
 
-  sidebar = document.getElementById("sidebar");
-  main = document.getElementById("main");
-  collapseBtn = document.getElementById("collapseBtn");
+  const sidebar = document.getElementById("sidebar");
+  const main = document.getElementById("main");
+  const collapseBtn = document.getElementById("collapseBtn");
 
   const mobileToggle = document.getElementById("mobileToggle");
   const overlay = document.getElementById("overlay");
@@ -895,38 +914,36 @@ function initSidebar() {
     overlay.classList.remove("active");
   }
 
-  collapseBtn.addEventListener("click", () => {
-
-    if (window.innerWidth <= 1100) {
-      closeSidebar();
-      return;
-    }
-
+  collapseBtn?.addEventListener("click", () => {
     sidebar.classList.toggle("collapsed");
     main.classList.toggle("expanded");
   });
 
-  mobileToggle.addEventListener("click", () => {
+  mobileToggle?.addEventListener("click", () => {
     sidebar.classList.contains("open") ? closeSidebar() : openSidebar();
   });
 
-  overlay.addEventListener("click", closeSidebar);
+  overlay?.addEventListener("click", closeSidebar);
 
   document.querySelectorAll(".nav-item").forEach(item => {
     item.addEventListener("click", closeSidebar);
   });
 
+  // IMPORTANT: wait until DOM is fully ready
+  loadCSVAndRenderChart();
 }
 
 /* =========================
-   LOAD SIDEBAR
+   LOAD SIDEBAR THEN START
 ========================= */
+
 fetch("sidebar.html")
   .then(res => res.text())
   .then(html => {
     document.getElementById("sidebar-container").innerHTML = html;
     initSidebar();
-  });
+  })
+  .catch(err => console.error("Sidebar failed:", err));
 
 </script>
 
