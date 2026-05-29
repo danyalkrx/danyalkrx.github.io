@@ -343,39 +343,60 @@ body::before{
   letter-spacing:0.16em;
 }
 
-.chart-placeholder{
-  display:flex;
-  align-items:flex-end;
-  justify-content:space-between;
-  gap:12px;
-  height:260px;
+/* LINE GRAPH */
+
+.line-chart{
+  position:relative;
+  height:280px;
   margin-top:34px;
+  border-radius:24px;
+  overflow:hidden;
 }
 
-.bar{
-  width:100%;
-  border-radius:18px 18px 6px 6px;
+.line-chart::before{
+  content:"";
+  position:absolute;
+  inset:0;
   background:
     linear-gradient(to top,
-    rgba(255,255,255,0.14),
-    rgba(130,150,255,0.55));
+      rgba(255,255,255,0.04) 1px,
+      transparent 1px);
+  background-size:100% 25%;
+  pointer-events:none;
 }
 
-.bar:nth-child(1){height:32%;}
-.bar:nth-child(2){height:48%;}
-.bar:nth-child(3){height:42%;}
-.bar:nth-child(4){height:68%;}
-.bar:nth-child(5){height:58%;}
-.bar:nth-child(6){height:88%;}
-.bar:nth-child(7){height:100%;}
+.line-chart svg{
+  width:100%;
+  height:100%;
+  overflow:visible;
+}
+
+.chart-area{
+  fill:url(#gradientFill);
+}
+
+.chart-line{
+  fill:none;
+  stroke:#9bb2ff;
+  stroke-width:4;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  filter:drop-shadow(0 0 12px rgba(120,140,255,0.45));
+}
+
+.chart-point{
+  fill:white;
+  stroke:#9bb2ff;
+  stroke-width:3;
+}
 
 .chart-labels{
-  margin-top:18px;
+  margin-top:20px;
   display:flex;
   justify-content:space-between;
-  color:rgba(255,255,255,0.34);
+  color:rgba(255,255,255,0.36);
   font-size:0.72rem;
-  text-transform:uppercase;
+  letter-spacing:0.04em;
 }
 
 /* PLATFORM TABLE */
@@ -513,6 +534,12 @@ body::before{
     text-align:left;
   }
 
+  .chart-labels{
+    font-size:0.56rem;
+    gap:8px;
+    overflow-x:auto;
+  }
+
 }
 
 </style>
@@ -626,24 +653,77 @@ body::before{
         <p>Last 7 Days</p>
       </div>
 
-      <div class="chart-placeholder">
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
+      <div class="line-chart">
+
+        <svg viewBox="0 0 700 280" preserveAspectRatio="none">
+
+          <defs>
+
+            <linearGradient id="gradientFill" x1="0" y1="0" x2="0" y2="1">
+
+              <stop offset="0%" stop-color="rgba(130,150,255,0.45)" />
+              <stop offset="100%" stop-color="rgba(130,150,255,0)" />
+
+            </linearGradient>
+
+          </defs>
+
+<!-- AREA -->
+
+<path
+  class="chart-area"
+  d="
+  M 40 215
+
+  C 90 205, 120 185, 160 175
+  C 210 160, 240 145, 280 140
+  C 330 135, 360 118, 400 105
+  C 450 90, 480 72, 520 68
+  C 570 64, 610 48, 660 42
+
+  L 660 280
+  L 40 280
+  Z
+  "
+/>
+
+<!-- LINE -->
+
+<path
+  class="chart-line"
+  d="
+  M 40 215
+
+  C 90 205, 120 185, 160 175
+  C 210 160, 240 145, 280 140
+  C 330 135, 360 118, 400 105
+  C 450 90, 480 72, 520 68
+  C 570 64, 610 48, 660 42
+  "
+/>
+
+          <!-- POINTS -->
+
+<circle class="chart-point" cx="40" cy="215" r="6"/>
+<circle class="chart-point" cx="160" cy="175" r="6"/>
+<circle class="chart-point" cx="280" cy="140" r="6"/>
+<circle class="chart-point" cx="400" cy="105" r="6"/>
+<circle class="chart-point" cx="520" cy="68" r="6"/>
+<circle class="chart-point" cx="660" cy="42" r="6"/>
+        </svg>
+
       </div>
 
       <div class="chart-labels">
-        <span>Mon</span>
-        <span>Tue</span>
-        <span>Wed</span>
-        <span>Thu</span>
-        <span>Fri</span>
-        <span>Sat</span>
-        <span>Sun</span>
+
+        <span>22-05-2026</span>
+        <span>23-05-2026</span>
+        <span>24-05-2026</span>
+        <span>25-05-2026</span>
+        <span>26-05-2026</span>
+        <span>27-05-2026</span>
+        <span>28-05-2026</span>
+
       </div>
 
     </div>
