@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>Triple Crown — New Release</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<link rel="icon" type="image/png" href="/artists/logo.png">
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'Inter',sans-serif;
+  background:#040404;
+  color:rgba(255,255,255,0.92);
+  overflow-x:hidden;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background-image:url("https://grainy-gradients.vercel.app/noise.svg");
+  opacity:0.04;
+  pointer-events:none;
+}
+
+.background-glow{
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  background:
+    radial-gradient(circle at 15% 10%, rgba(255,255,255,0.025), transparent 40%),
+    radial-gradient(circle at 80% 90%, rgba(90,110,255,0.04), transparent 50%);
+}
+
+/* SIDEBAR */
+
+.sidebar{
+  position:fixed;
+  left:0;
+  top:0;
+  width:270px;
+  height:100vh;
+
+  border-right:1px solid rgba(255,255,255,0.06);
+  background:rgba(7,7,7,0.75);
+  backdrop-filter:blur(20px);
+
+  padding:28px 18px;
+
+  display:flex;
+  flex-direction:column;
+
+  z-index:100;
+  transition:0.3s ease;
+}
+
+.sidebar.collapsed{
+  width:96px;
+}
+
+.sidebar-top{
+  display:flex;
+  flex-direction:column;
+  gap:22px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+
+.brand img{
+  width:56px;
+  min-width:56px;
+}
+
+.brand-text{
+  transition:0.25s ease;
+}
+
+.brand-text h1{
+  font-size:0.9rem;
+  letter-spacing:0.34em;
+  text-transform:uppercase;
+  font-weight:900;
+}
+
+.brand-text p{
+  font-size:0.62rem;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  opacity:0.45;
+  margin-top:4px;
+}
+
+.sidebar.collapsed .brand{
+  justify-content:center;
+}
+
+.sidebar.collapsed .brand-text{
+  opacity:0;
+  width:0;
+  overflow:hidden;
+}
+
+.nav-links{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  margin-top:28px;
+  flex:1;
+}
+
+.nav-item{
+  text-decoration:none;
+  color:rgba(255,255,255,0.72);
+
+  padding:15px 16px;
+  border-radius:18px;
+
+  transition:0.22s ease;
+  border:1px solid transparent;
+
+  font-weight:700;
+
+  display:flex;
+  align-items:center;
+  gap:16px;
+
+  overflow:hidden;
+}
+
+.nav-item:hover,
+.nav-item.active{
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.06);
+  color:white;
+}
+
+.nav-icon{
+  min-width:24px;
+  display:flex;
+  justify-content:center;
+  font-size:1rem;
+}
+
+.nav-label{
+  font-size:0.78rem;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  white-space:nowrap;
+  transition:0.2s ease;
+}
+
+.sidebar.collapsed .nav-label{
+  opacity:0;
+  width:0;
+  overflow:hidden;
+}
+
+.collapse-btn{
+  width:42px;
+  height:42px;
+
+  border:none;
+  border-radius:14px;
+
+  background:rgba(255,255,255,0.05);
+  color:white;
+
+  cursor:pointer;
+
+  font-size:1rem;
+
+  transition:0.2s ease;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  margin-top:auto;
+  align-self:flex-start;
+}
+
+.collapse-btn:hover{
+  background:white;
+  color:black;
+}
+
+/* MAIN */
+
+.main{
+  margin-left:270px;
+  padding:42px;
+  transition:0.3s ease;
+}
+
+.main.expanded{
+  margin-left:96px;
+}
+
+/* HEADER */
+
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:38px;
+}
+
+.page-title h2{
+  font-size:2.8rem;
+  font-weight:900;
+  letter-spacing:-0.04em;
+}
+
+.page-title p{
+  margin-top:10px;
+  color:rgba(255,255,255,0.45);
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  font-size:0.75rem;
+}
+
+/* FORM */
+
+.form-card{
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:32px;
+  padding:34px;
+  backdrop-filter:blur(18px);
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:24px;
+}
+
+.full{
+  grid-column:1 / -1;
+}
+
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.field label{
+  font-size:0.72rem;
+  text-transform:uppercase;
+  letter-spacing:0.18em;
+  color:rgba(255,255,255,0.48);
+  font-weight:700;
+}
+
+.field input,
+.field textarea,
+.field select{
+  width:100%;
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:18px;
+  padding:18px;
+  color:white;
+  font-family:'Inter',sans-serif;
+  font-size:0.95rem;
+  outline:none;
+  transition:0.2s ease;
+}
+
+.field textarea{
+  resize:vertical;
+  min-height:130px;
+}
+
+.field input:focus,
+.field textarea:focus,
+.field select:focus{
+  border-color:rgba(255,255,255,0.18);
+  background:rgba(255,255,255,0.05);
+}
+
+input[type="file"]{
+  padding:16px;
+  cursor:pointer;
+}
+
+input[type="date"]{
+  color-scheme:dark;
+}
+
+.submit-wrap{
+  margin-top:34px;
+  display:flex;
+  justify-content:flex-end;
+}
+
+.submit-btn{
+  background:white;
+  color:black;
+  border:none;
+
+  padding:18px 30px;
+
+  border-radius:18px;
+
+  font-size:0.82rem;
+  font-weight:900;
+
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+
+  cursor:pointer;
+  transition:0.22s ease;
+
+  box-shadow:0 10px 30px rgba(0,0,0,0.35);
+}
+
+.submit-btn:hover{
+  transform:translateY(-3px);
+  background:rgba(255,255,255,0.9);
+}
+
+/* MOBILE */
+
+@media(max-width:1100px){
+
+  .sidebar{
+    transform:translateX(-100%);
+  }
+
+  .main,
+  .main.expanded{
+    margin-left:0;
+    padding:24px;
+  }
+
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+}
+
+@media(max-width:760px){
+
+  .topbar{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:24px;
+  }
+
+  .form-card{
+    padding:24px;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="background-glow"></div>
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar" id="sidebar">
+
+  <div class="sidebar-top">
+
+    <div class="brand">
+
+      <img src="/artists/logo-transparent.png">
+
+      <div class="brand-text">
+        <h1>Triple Crown</h1>
+        <p>Media Group</p>
+      </div>
+
+    </div>
+
+  </div>
+
+  <nav class="nav-links">
+
+    <a class="nav-item active" href="dashboardtcmg.html">
+      <span class="nav-icon">⌂</span>
+      <span class="nav-label">Dashboard</span>
+    </a>
+
+    <a class="nav-item" href="releasestcmg.html">
+      <span class="nav-icon">♫</span>
+      <span class="nav-label">Releases</span>
+    </a>
+
+  </nav>
+
+  <button class="collapse-btn" id="collapseBtn">
+    ☰
+  </button>
+
+</aside>
+
+<!-- MAIN -->
+
+<main class="main" id="main">
+
+  <div class="topbar">
+
+    <div class="page-title">
+      <h2>New Release</h2>
+      <p>Upload & Manage Distribution Metadata</p>
+    </div>
+
+  </div>
+
+  <!-- FORM -->
+
+  <section class="form-card">
+
+    <form class="form-grid">
+
+      <div class="field">
+        <label>Release Title</label>
+        <input type="text" placeholder="Take Care">
+      </div>
+
+      <div class="field">
+        <label>Primary Artist</label>
+        <input type="text" placeholder="Drake">
+      </div>
+
+      <div class="field">
+        <label>Featured Artists</label>
+        <input type="text" placeholder="Future, PARTYNEXTDOOR">
+      </div>
+
+      <div class="field">
+        <label>Release Type</label>
+        <select>
+          <option>Single</option>
+          <option>EP</option>
+          <option>Album</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Genre</label>
+        <input type="text" placeholder="Hip-Hop">
+      </div>
+
+      <div class="field">
+        <label>Language</label>
+        <input type="text" placeholder="English">
+      </div>
+
+      <div class="field full">
+        <label>Songwriters / Composers</label>
+        <textarea placeholder="List all writers separated by commas"></textarea>
+      </div>
+
+      <div class="field full">
+        <label>Producers</label>
+        <textarea placeholder="List all producers separated by commas"></textarea>
+      </div>
+
+      <div class="field">
+        <label>Release Date</label>
+        <input type="date">
+      </div>
+
+      <div class="field">
+        <label>Explicit Content</label>
+        <select>
+          <option>No</option>
+          <option>Yes</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>UPC / Barcode</label>
+        <input type="text" placeholder="Optional">
+      </div>
+
+      <div class="field">
+        <label>ISRC</label>
+        <input type="text" placeholder="Optional">
+      </div>
+
+      <div class="field full">
+        <label>Copyright Line (C)</label>
+        <input type="text" placeholder="© 2026 Triple Crown Media Group">
+      </div>
+
+      <div class="field full">
+        <label>Production / Master Line (P)</label>
+        <input type="text" placeholder="℗ 2026 Triple Crown Media Group">
+      </div>
+
+      <div class="field full">
+        <label>Lyrics</label>
+        <textarea placeholder="Paste lyrics here..."></textarea>
+      </div>
+
+      <div class="field">
+        <label>Cover Art</label>
+        <input type="file" accept="image/*">
+      </div>
+
+      <div class="field">
+        <label>Audio File</label>
+        <input type="file" accept=".wav,.mp3,.flac">
+      </div>
+
+      <div class="field full">
+        <label>Additional Notes</label>
+        <textarea placeholder="Distribution instructions, split notes, credits, etc."></textarea>
+      </div>
+
+    </form>
+
+    <div class="submit-wrap">
+      <button class="submit-btn">
+        Submit Release
+      </button>
+    </div>
+
+  </section>
+
+</main>
+
+<script>
+
+const sidebar = document.getElementById("sidebar");
+const collapseBtn = document.getElementById("collapseBtn");
+const main = document.getElementById("main");
+
+collapseBtn.addEventListener("click", () => {
+
+  sidebar.classList.toggle("collapsed");
+  main.classList.toggle("expanded");
+
+});
+
+</script>
+
+</body>
+</html>
