@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
@@ -11,19 +12,7 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-  <link rel="icon" type="image/png" href="/artists/logo.png">
-<link rel="apple-touch-icon" href="/artists/logo.png">
-
-<meta property="og:title" content="Triple Crown Media Group">
-<meta property="og:description" content="Toronto-based music distribution, publishing, and artist development.">
-<meta property="og:image" content="/artists/logo.png">
-<meta property="og:type" content="website">
-
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Triple Crown Media Group">
-<meta name="twitter:description" content="Toronto-based music distribution, publishing, and artist development.">
-<meta name="twitter:image" content="/artists/logo.png">
-
+<link rel="icon" type="image/png" href="/artists/logo.png">
 
 <style>
 
@@ -72,53 +61,104 @@ body::before{
   border-right:1px solid rgba(255,255,255,0.06);
   background:rgba(7,7,7,0.75);
   backdrop-filter:blur(20px);
-  padding:34px 28px;
+  padding:28px 18px;
   z-index:100;
+  transition:0.3s ease;
+}
+
+.sidebar.collapsed{
+  width:96px;
+}
+
+.sidebar-top{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:22px;
+  margin-bottom:54px;
 }
 
 .brand{
   display:flex;
   align-items:center;
   gap:16px;
-  margin-bottom:60px;
+  overflow:hidden;
 }
 
 .brand img{
-  width:62px;
+  width:56px;
+  min-width:56px;
+}
+
+.brand-text{
+  white-space:nowrap;
+  transition:0.25s ease;
 }
 
 .brand-text h1{
-  font-size:0.95rem;
+  font-size:0.9rem;
   letter-spacing:0.34em;
   text-transform:uppercase;
   font-weight:900;
 }
 
 .brand-text p{
-  font-size:0.65rem;
+  font-size:0.62rem;
   letter-spacing:0.22em;
   text-transform:uppercase;
   opacity:0.45;
   margin-top:4px;
 }
 
+.sidebar.collapsed .brand-text{
+  opacity:0;
+  width:0;
+}
+
+.collapse-btn{
+  width:42px;
+  height:42px;
+  border:none;
+  border-radius:14px;
+  background:rgba(255,255,255,0.05);
+  color:white;
+  cursor:pointer;
+  font-size:1rem;
+  transition:0.2s ease;
+  flex-shrink:0;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.collapse-btn:hover{
+  background:white;
+  color:black;
+}
+
+/* NAV */
+
 .nav-links{
   display:flex;
   flex-direction:column;
-  gap:14px;
+  gap:12px;
 }
 
 .nav-item{
   text-decoration:none;
   color:rgba(255,255,255,0.72);
-  padding:16px 18px;
+  padding:15px 16px;
   border-radius:18px;
-  transition:0.2s ease;
-  font-size:0.82rem;
-  letter-spacing:0.14em;
-  text-transform:uppercase;
+  transition:0.22s ease;
   border:1px solid transparent;
   font-weight:700;
+
+  display:flex;
+  align-items:center;
+  gap:16px;
+
+  overflow:hidden;
 }
 
 .nav-item:hover,
@@ -128,12 +168,39 @@ body::before{
   color:white;
 }
 
+.nav-icon{
+  min-width:24px;
+  display:flex;
+  justify-content:center;
+  font-size:1rem;
+}
+
+.nav-label{
+  font-size:0.78rem;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  white-space:nowrap;
+  transition:0.2s ease;
+}
+
+.sidebar.collapsed .nav-label{
+  opacity:0;
+  width:0;
+}
+
 /* MAIN */
 
 .main{
   margin-left:270px;
   padding:42px;
+  transition:0.3s ease;
 }
+
+.main.expanded{
+  margin-left:96px;
+}
+
+/* TOPBAR */
 
 .topbar{
   display:flex;
@@ -143,7 +210,7 @@ body::before{
 }
 
 .page-title h2{
-  font-size:2.6rem;
+  font-size:2.8rem;
   font-weight:900;
   letter-spacing:-0.04em;
 }
@@ -171,14 +238,13 @@ body::before{
 
 .profile-info strong{
   display:block;
-  font-size:0.95rem;
 }
 
 .profile-info span{
   font-size:0.7rem;
-  opacity:0.5;
-  letter-spacing:0.14em;
+  opacity:0.45;
   text-transform:uppercase;
+  letter-spacing:0.12em;
 }
 
 /* CARDS */
@@ -208,7 +274,6 @@ body::before{
     linear-gradient(to bottom right,
     rgba(255,255,255,0.04),
     transparent 40%);
-  pointer-events:none;
 }
 
 .stat-label{
@@ -230,10 +295,9 @@ body::before{
   color:#7dffbc;
   font-size:0.82rem;
   font-weight:700;
-  letter-spacing:0.08em;
 }
 
-/* LARGE GRID */
+/* CONTENT GRID */
 
 .content-grid{
   display:grid;
@@ -243,17 +307,6 @@ body::before{
 }
 
 /* CHART */
-
-.chart-card{
-  min-height:420px;
-}
-
-.chart-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:34px;
-}
 
 .chart-title h3{
   font-size:1.2rem;
@@ -274,7 +327,7 @@ body::before{
   justify-content:space-between;
   gap:12px;
   height:260px;
-  padding-top:20px;
+  margin-top:34px;
 }
 
 .bar{
@@ -284,14 +337,6 @@ body::before{
     linear-gradient(to top,
     rgba(255,255,255,0.14),
     rgba(130,150,255,0.55));
-  position:relative;
-}
-
-.bar::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(to top, transparent, rgba(255,255,255,0.08));
 }
 
 .bar:nth-child(1){height:32%;}
@@ -309,66 +354,6 @@ body::before{
   color:rgba(255,255,255,0.34);
   font-size:0.72rem;
   text-transform:uppercase;
-  letter-spacing:0.14em;
-}
-
-/* TRACKS */
-
-.track-list{
-  display:flex;
-  flex-direction:column;
-  gap:16px;
-}
-
-.track{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:16px;
-  border-radius:20px;
-  background:rgba(255,255,255,0.025);
-  border:1px solid rgba(255,255,255,0.04);
-}
-
-.track-left{
-  display:flex;
-  align-items:center;
-  gap:16px;
-}
-
-.track img{
-  width:58px;
-  height:58px;
-  border-radius:16px;
-  object-fit:cover;
-}
-
-.track-info strong{
-  display:block;
-  font-size:0.92rem;
-}
-
-.track-info span{
-  font-size:0.72rem;
-  opacity:0.45;
-  letter-spacing:0.14em;
-  text-transform:uppercase;
-}
-
-.track-stats{
-  text-align:right;
-}
-
-.track-stats strong{
-  display:block;
-  font-size:1rem;
-}
-
-.track-stats span{
-  font-size:0.72rem;
-  opacity:0.45;
-  text-transform:uppercase;
-  letter-spacing:0.12em;
 }
 
 /* PLATFORM TABLE */
@@ -377,6 +362,7 @@ body::before{
   display:flex;
   flex-direction:column;
   gap:14px;
+  margin-top:28px;
 }
 
 .platform-row{
@@ -406,26 +392,55 @@ body::before{
   font-weight:800;
 }
 
-.platform-name strong{
-  display:block;
-}
-
 .platform-name span{
   font-size:0.72rem;
   opacity:0.45;
   text-transform:uppercase;
-  letter-spacing:0.12em;
 }
 
-.platform-value{
+/* TRACKS */
+
+.track-list{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+  margin-top:28px;
+}
+
+.track{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:16px;
+  border-radius:20px;
+  background:rgba(255,255,255,0.025);
+  border:1px solid rgba(255,255,255,0.04);
+}
+
+.track-left{
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+
+.track img{
+  width:58px;
+  height:58px;
+  border-radius:16px;
+  object-fit:cover;
+}
+
+.track-info span{
+  font-size:0.72rem;
+  opacity:0.45;
+  text-transform:uppercase;
+}
+
+.track-stats{
   text-align:right;
 }
 
-.platform-value strong{
-  display:block;
-}
-
-.platform-value span{
+.track-stats span{
   font-size:0.72rem;
   opacity:0.45;
 }
@@ -435,10 +450,11 @@ body::before{
 @media(max-width:1100px){
 
   .sidebar{
-    display:none;
+    transform:translateX(-100%);
   }
 
-  .main{
+  .main,
+  .main.expanded{
     margin-left:0;
     padding:24px;
   }
@@ -455,26 +471,14 @@ body::before{
 
 @media(max-width:760px){
 
-  .topbar{
-    flex-direction:column;
-    align-items:flex-start;
-    gap:26px;
-  }
-
-  .page-title h2{
-    font-size:2rem;
-  }
-
   .stats-grid{
     grid-template-columns:1fr;
   }
 
-  .card{
-    padding:24px;
-  }
-
-  .chart-placeholder{
-    gap:8px;
+  .topbar{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:24px;
   }
 
   .track{
@@ -498,36 +502,61 @@ body::before{
 
 <!-- SIDEBAR -->
 
-<aside class="sidebar">
+<aside class="sidebar" id="sidebar">
 
-  <div class="brand">
+  <div class="sidebar-top">
 
-    <img src="/artists/logo-transparent.png">
+    <div class="brand">
 
-    <div class="brand-text">
-      <h1>Triple Crown</h1>
-      <p>Media Group</p>
+      <img src="/artists/logo-transparent.png">
+
+      <div class="brand-text">
+        <h1>Triple Crown</h1>
+        <p>Media Group</p>
+      </div>
+
     </div>
+
+    <button class="collapse-btn" id="collapseBtn">
+      ☰
+    </button>
 
   </div>
 
   <nav class="nav-links">
 
     <a class="nav-item active" href="#">
-      Dashboard
+      <span class="nav-icon">⌂</span>
+      <span class="nav-label">Dashboard</span>
     </a>
 
     <a class="nav-item" href="#">
-      Releases
+      <span class="nav-icon">♫</span>
+      <span class="nav-label">Releases</span>
     </a>
-    
+
+    <a class="nav-item" href="#">
+      <span class="nav-icon">◔</span>
+      <span class="nav-label">Analytics</span>
+    </a>
+
+    <a class="nav-item" href="#">
+      <span class="nav-icon">$</span>
+      <span class="nav-label">Revenue</span>
+    </a>
+
+    <a class="nav-item" href="#">
+      <span class="nav-icon">⚙</span>
+      <span class="nav-label">Settings</span>
+    </a>
+
   </nav>
 
 </aside>
 
 <!-- MAIN -->
 
-<main class="main">
+<main class="main" id="main">
 
   <div class="topbar">
 
@@ -554,67 +583,27 @@ body::before{
   <section class="stats-grid">
 
     <div class="card">
-
-      <div class="stat-label">
-        Monthly Streams
-      </div>
-
-      <div class="stat-value">
-        482K
-      </div>
-
-      <div class="stat-change">
-        +18.4% This Month
-      </div>
-
+      <div class="stat-label">Monthly Streams</div>
+      <div class="stat-value">482K</div>
+      <div class="stat-change">+18.4% This Month</div>
     </div>
 
     <div class="card">
-
-      <div class="stat-label">
-        Estimated Revenue
-      </div>
-
-      <div class="stat-value">
-        $1,924
-      </div>
-
-      <div class="stat-change">
-        +11.2% Growth
-      </div>
-
+      <div class="stat-label">Estimated Revenue</div>
+      <div class="stat-value">$1,924</div>
+      <div class="stat-change">+11.2% Growth</div>
     </div>
 
     <div class="card">
-
-      <div class="stat-label">
-        Monthly Listeners
-      </div>
-
-      <div class="stat-value">
-        128K
-      </div>
-
-      <div class="stat-change">
-        +7.9% Increase
-      </div>
-
+      <div class="stat-label">Monthly Listeners</div>
+      <div class="stat-value">128K</div>
+      <div class="stat-change">+7.9% Increase</div>
     </div>
 
     <div class="card">
-
-      <div class="stat-label">
-        Playlist Adds
-      </div>
-
-      <div class="stat-value">
-        3.8K
-      </div>
-
-      <div class="stat-change">
-        +31% This Week
-      </div>
-
+      <div class="stat-label">Playlist Adds</div>
+      <div class="stat-value">3.8K</div>
+      <div class="stat-change">+31% This Week</div>
     </div>
 
   </section>
@@ -623,21 +612,14 @@ body::before{
 
   <section class="content-grid">
 
-    <!-- STREAM CHART -->
+    <div class="card">
 
-    <div class="card chart-card">
-
-      <div class="chart-header">
-
-        <div class="chart-title">
-          <h3>Streaming Growth</h3>
-          <p>Last 7 Days</p>
-        </div>
-
+      <div class="chart-title">
+        <h3>Streaming Growth</h3>
+        <p>Last 7 Days</p>
       </div>
 
       <div class="chart-placeholder">
-
         <div class="bar"></div>
         <div class="bar"></div>
         <div class="bar"></div>
@@ -645,11 +627,9 @@ body::before{
         <div class="bar"></div>
         <div class="bar"></div>
         <div class="bar"></div>
-
       </div>
 
       <div class="chart-labels">
-
         <span>Mon</span>
         <span>Tue</span>
         <span>Wed</span>
@@ -657,16 +637,13 @@ body::before{
         <span>Fri</span>
         <span>Sat</span>
         <span>Sun</span>
-
       </div>
 
     </div>
 
-    <!-- TOP PLATFORMS -->
-
     <div class="card">
 
-      <div class="chart-title" style="margin-bottom:28px;">
+      <div class="chart-title">
         <h3>Platform Revenue</h3>
         <p>Current Month</p>
       </div>
@@ -674,91 +651,25 @@ body::before{
       <div class="platform-table">
 
         <div class="platform-row">
-
           <div class="platform-left">
-
-            <div class="platform-icon">
-              ♫
-            </div>
-
+            <div class="platform-icon">♫</div>
             <div class="platform-name">
               <strong>Spotify</strong>
               <span>312K Streams</span>
             </div>
-
           </div>
-
-          <div class="platform-value">
-            <strong>$1,084</strong>
-            <span>56%</span>
-          </div>
-
+          <strong>$1,084</strong>
         </div>
 
         <div class="platform-row">
-
           <div class="platform-left">
-
-            <div class="platform-icon">
-              
-            </div>
-
+            <div class="platform-icon"></div>
             <div class="platform-name">
               <strong>Apple Music</strong>
               <span>88K Streams</span>
             </div>
-
           </div>
-
-          <div class="platform-value">
-            <strong>$542</strong>
-            <span>28%</span>
-          </div>
-
-        </div>
-
-        <div class="platform-row">
-
-          <div class="platform-left">
-
-            <div class="platform-icon">
-              ▶
-            </div>
-
-            <div class="platform-name">
-              <strong>YouTube Music</strong>
-              <span>52K Streams</span>
-            </div>
-
-          </div>
-
-          <div class="platform-value">
-            <strong>$188</strong>
-            <span>10%</span>
-          </div>
-
-        </div>
-
-        <div class="platform-row">
-
-          <div class="platform-left">
-
-            <div class="platform-icon">
-              ♪
-            </div>
-
-            <div class="platform-name">
-              <strong>TikTok</strong>
-              <span>1.2K Creations</span>
-            </div>
-
-          </div>
-
-          <div class="platform-value">
-            <strong>$110</strong>
-            <span>6%</span>
-          </div>
-
+          <strong>$542</strong>
         </div>
 
       </div>
@@ -767,11 +678,11 @@ body::before{
 
   </section>
 
-  <!-- TOP TRACKS -->
+  <!-- TRACKS -->
 
   <section class="card">
 
-    <div class="chart-title" style="margin-bottom:28px;">
+    <div class="chart-title">
       <h3>Top Performing Releases</h3>
       <p>By Revenue & Streams</p>
     </div>
@@ -818,31 +729,26 @@ body::before{
 
       </div>
 
-      <div class="track">
-
-        <div class="track-left">
-
-          <img src="/artists/iceman.jpeg">
-
-          <div class="track-info">
-            <strong>Iceman</strong>
-            <span>EP • 2025</span>
-          </div>
-
-        </div>
-
-        <div class="track-stats">
-          <strong>96K Streams</strong>
-          <span>$388 Revenue</span>
-        </div>
-
-      </div>
-
     </div>
 
   </section>
 
 </main>
+
+<script>
+
+const sidebar = document.getElementById("sidebar");
+const collapseBtn = document.getElementById("collapseBtn");
+const main = document.getElementById("main");
+
+collapseBtn.addEventListener("click", () => {
+
+  sidebar.classList.toggle("collapsed");
+  main.classList.toggle("expanded");
+
+});
+
+</script>
 
 </body>
 </html>
