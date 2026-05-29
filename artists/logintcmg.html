@@ -262,11 +262,10 @@ document.getElementById("loginForm").addEventListener("submit", function(e) {
   const username = document.querySelector('input[type="text"]').value;
   const password = document.querySelector('input[type="password"]').value;
 
-  if (username === "test" && password === "test") {
-    window.location.href = "dashboardtcmg.html";
-  } else {
-    alert("Invalid credentials");
-  }
+if (username === "test" && password === "test") {
+  localStorage.setItem("tcmg_auth", "true");
+  window.location.href = "dashboardtcmg.html";
+}
 });
 </script>
 
