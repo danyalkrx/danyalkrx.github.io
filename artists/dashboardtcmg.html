@@ -24,10 +24,7 @@
 
 body{
   font-family:'Inter',sans-serif;
-  background:
-    radial-gradient(circle at top left, rgba(100,100,255,0.08), transparent 28%),
-    radial-gradient(circle at bottom right, rgba(255,255,255,0.05), transparent 32%),
-    #040404;
+  background:#040404;
   color:rgba(255,255,255,0.92);
   overflow-x:hidden;
 }
@@ -46,8 +43,8 @@ body::before{
   inset:0;
   z-index:-1;
   background:
-    radial-gradient(circle at 15% 10%, rgba(255,255,255,0.03), transparent 40%),
-    radial-gradient(circle at 80% 90%, rgba(90,110,255,0.06), transparent 50%);
+    radial-gradient(circle at 15% 10%, rgba(255,255,255,0.025), transparent 40%),
+    radial-gradient(circle at 80% 90%, rgba(90,110,255,0.04), transparent 50%);
 }
 
 /* SIDEBAR */
@@ -58,10 +55,16 @@ body::before{
   top:0;
   width:270px;
   height:100vh;
+
   border-right:1px solid rgba(255,255,255,0.06);
   background:rgba(7,7,7,0.75);
   backdrop-filter:blur(20px);
+
   padding:28px 18px;
+
+  display:flex;
+  flex-direction:column;
+
   z-index:100;
   transition:0.3s ease;
 }
@@ -70,34 +73,18 @@ body::before{
   width:96px;
 }
 
-.sidebar.collapsed .sidebar-top{
-  align-items:center;
-}
-
-.sidebar.collapsed .collapse-btn{
-  margin:0 auto;
-}
-
-.sidebar.collapsed .brand{
-  width:100%;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-}
+/* TOP */
 
 .sidebar-top{
   display:flex;
   flex-direction:column;
-  align-items:flex-start;
   gap:22px;
-  margin-bottom:54px;
 }
 
 .brand{
   display:flex;
   align-items:center;
   gap:16px;
-  overflow:hidden;
 }
 
 .brand img{
@@ -125,36 +112,16 @@ body::before{
   margin-top:4px;
 }
 
+/* COLLAPSED */
+
+.sidebar.collapsed .brand{
+  justify-content:center;
+}
+
 .sidebar.collapsed .brand-text{
   opacity:0;
   width:0;
   overflow:hidden;
-}
-
-.sidebar.collapsed .brand img{
-  margin:0 auto;
-}
-
-.collapse-btn{
-  width:42px;
-  height:42px;
-  border:none;
-  border-radius:14px;
-  background:rgba(255,255,255,0.05);
-  color:white;
-  cursor:pointer;
-  font-size:1rem;
-  transition:0.2s ease;
-  flex-shrink:0;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.collapse-btn:hover{
-  background:white;
-  color:black;
 }
 
 /* NAV */
@@ -163,15 +130,20 @@ body::before{
   display:flex;
   flex-direction:column;
   gap:12px;
+  margin-top:28px;
+  flex:1;
 }
 
 .nav-item{
   text-decoration:none;
   color:rgba(255,255,255,0.72);
+
   padding:15px 16px;
   border-radius:18px;
+
   transition:0.22s ease;
   border:1px solid transparent;
+
   font-weight:700;
 
   display:flex;
@@ -206,6 +178,38 @@ body::before{
 .sidebar.collapsed .nav-label{
   opacity:0;
   width:0;
+  overflow:hidden;
+}
+
+/* COLLAPSE BUTTON */
+
+.collapse-btn{
+  width:42px;
+  height:42px;
+
+  border:none;
+  border-radius:14px;
+
+  background:rgba(255,255,255,0.05);
+  color:white;
+
+  cursor:pointer;
+
+  font-size:1rem;
+
+  transition:0.2s ease;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  margin-top:auto;
+  align-self:flex-start;
+}
+
+.collapse-btn:hover{
+  background:white;
+  color:black;
 }
 
 /* MAIN */
@@ -537,25 +541,25 @@ body::before{
 
     </div>
 
-    <button class="collapse-btn" id="collapseBtn">
-      ☰
-    </button>
-
   </div>
 
   <nav class="nav-links">
 
-    <a class="nav-item active" href="#">
+    <a class="nav-item active" href="dashboardtcmg.html">
       <span class="nav-icon">⌂</span>
       <span class="nav-label">Dashboard</span>
     </a>
 
-    <a class="nav-item" href="#">
+    <a class="nav-item" href="releasestcmg.html">
       <span class="nav-icon">♫</span>
       <span class="nav-label">Releases</span>
     </a>
 
   </nav>
+
+  <button class="collapse-btn" id="collapseBtn">
+    ☰
+  </button>
 
 </aside>
 

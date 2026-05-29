@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>Triple Crown — Releases</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<link rel="icon" type="image/png" href="/artists/logo.png">
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'Inter',sans-serif;
+  background:#040404;
+  color:rgba(255,255,255,0.92);
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background-image:url("https://grainy-gradients.vercel.app/noise.svg");
+  opacity:0.03;
+  pointer-events:none;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+  position:fixed;
+  left:0;
+  top:0;
+  width:270px;
+  height:100vh;
+  background:rgba(7,7,7,0.75);
+  backdrop-filter:blur(20px);
+  border-right:1px solid rgba(255,255,255,0.06);
+  padding:28px 18px;
+
+  display:flex;
+  flex-direction:column;
+
+  transition:0.3s ease;
+  z-index:100;
+}
+
+.sidebar.collapsed{
+  width:96px;
+}
+
+/* TOP BRAND */
+
+.sidebar-top{
+  display:flex;
+  flex-direction:column;
+  gap:22px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.brand img{
+  width:54px;
+}
+
+.brand-text{
+  transition:0.2s ease;
+}
+
+.brand-text h1{
+  font-size:0.9rem;
+  letter-spacing:0.34em;
+  text-transform:uppercase;
+  font-weight:900;
+}
+
+.brand-text p{
+  font-size:0.62rem;
+  opacity:0.5;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+}
+
+/* collapse brand behavior */
+.sidebar.collapsed .brand-text{
+  opacity:0;
+  width:0;
+  overflow:hidden;
+}
+
+/* CENTER BRAND WHEN COLLAPSED */
+.sidebar.collapsed .brand{
+  justify-content:center;
+}
+
+/* NAV */
+
+.nav-links{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  margin-top:28px;
+  flex:1;
+}
+
+.nav-item{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding:14px 16px;
+  border-radius:16px;
+  text-decoration:none;
+  color:rgba(255,255,255,0.75);
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:0.12em;
+  font-size:0.75rem;
+}
+
+.nav-item:hover,
+.nav-item.active{
+  background:rgba(255,255,255,0.05);
+  color:white;
+}
+
+.nav-icon{
+  min-width:24px;
+  display:flex;
+  justify-content:center;
+  font-size:1rem;
+}
+
+
+.nav-label{
+  transition:0.2s ease;
+}
+
+.sidebar.collapsed .nav-label{
+  opacity:0;
+  width:0;
+  overflow:hidden;
+}
+
+/* COLLAPSE BUTTON (BOTTOM) */
+
+.collapse-btn{
+  width:42px;
+  height:42px;
+  border:none;
+  border-radius:14px;
+  background:rgba(255,255,255,0.05);
+  color:white;
+  cursor:pointer;
+
+  margin-top:auto;
+  align-self:flex-start;
+}
+
+/* MAIN */
+
+.main{
+  margin-left:270px;
+  padding:42px;
+  transition:0.3s ease;
+}
+
+.main.expanded{
+  margin-left:96px;
+}
+
+/* TOP */
+
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:38px;
+}
+
+.title h2{
+  font-size:2.6rem;
+  font-weight:900;
+}
+
+.title p{
+  font-size:0.75rem;
+  opacity:0.5;
+  text-transform:uppercase;
+  letter-spacing:0.14em;
+  margin-top:8px;
+}
+
+.new-btn{
+  background:white;
+  color:black;
+  border:none;
+
+  padding:18px 28px;
+  font-size:0.85rem;
+
+  border-radius:18px;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:0.14em;
+
+  cursor:pointer;
+  transition:0.22s ease;
+
+  box-shadow:0 10px 30px rgba(0,0,0,0.35);
+}
+
+.new-btn:hover{
+  transform:translateY(-3px);
+  background:rgba(255,255,255,0.9);
+}
+
+/* GRID */
+
+.release-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+  gap:22px;
+}
+
+/* CARD */
+
+.release{
+  position:relative;
+  border-radius:26px;
+  overflow:hidden;
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.06);
+  transition:0.25s ease;
+}
+
+.release:hover{
+  transform:translateY(-6px);
+}
+
+.release img{
+  width:100%;
+  aspect-ratio:1/1;
+  object-fit:cover;
+  display:block;
+}
+
+/* OVERLAY */
+
+.overlay{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+  opacity:0;
+  transition:0.25s ease;
+  display:flex;
+  align-items:flex-end;
+  padding:20px;
+}
+
+.release:hover .overlay{
+  opacity:1;
+}
+
+.overlay-info{
+  display:flex;
+  justify-content:space-between;
+  width:100%;
+  font-size:0.75rem;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+}
+
+/* INFO */
+
+.info{
+  padding:18px;
+}
+
+.info strong{
+  display:block;
+  font-size:1rem;
+  margin-bottom:6px;
+}
+
+.info span{
+  font-size:0.7rem;
+  opacity:0.45;
+  text-transform:uppercase;
+  letter-spacing:0.12em;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+  .sidebar{
+    display:none;
+  }
+
+  .main{
+    margin-left:0;
+    padding:22px;
+  }
+
+  .release-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+
+  <div class="sidebar-top">
+
+    <div class="brand">
+      <img src="/artists/logo-transparent.png">
+      <div class="brand-text">
+        <h1>Triple Crown</h1>
+        <p>Media Group</p>
+      </div>
+    </div>
+
+  </div>
+
+  <nav class="nav-links">
+
+    <a class="nav-item active" href="dashboardtcmg.html">
+      <span class="nav-icon">⌂</span>
+      <span class="nav-label">Dashboard</span>
+    </a>
+
+    <a class="nav-item" href="releasestcmg.html">
+      <span class="nav-icon">♫</span>
+      <span class="nav-label">Releases</span>
+    </a>
+
+  </nav>
+
+  <button class="collapse-btn" id="collapseBtn">☰</button>
+
+</aside>
+
+<!-- MAIN -->
+<main class="main" id="main">
+
+  <div class="topbar">
+
+    <div class="title">
+      <h2>Releases</h2>
+      <p>Your full catalog</p>
+    </div>
+
+    <button class="new-btn">+ New Release</button>
+
+  </div>
+
+  <section class="release-grid">
+
+    <div class="release">
+      <img src="/artists/takecare.jpg">
+      <div class="overlay">
+        <div class="overlay-info">
+          <span>Drake</span>
+          <span>2026</span>
+        </div>
+      </div>
+      <div class="info">
+        <strong>Take Care</strong>
+        <span>Single</span>
+      </div>
+    </div>
+
+    <div class="release">
+      <img src="/artists/habibti.jpg">
+      <div class="overlay">
+        <div class="overlay-info">
+          <span>Drake</span>
+          <span>2026</span>
+        </div>
+      </div>
+      <div class="info">
+        <strong>Habibti</strong>
+        <span>Single</span>
+      </div>
+    </div>
+
+    <div class="release">
+      <img src="/artists/iceman.jpeg">
+      <div class="overlay">
+        <div class="overlay-info">
+          <span>Drake</span>
+          <span>2025</span>
+        </div>
+      </div>
+      <div class="info">
+        <strong>Iceman</strong>
+        <span>EP</span>
+      </div>
+    </div>
+
+  </section>
+
+</main>
+
+<script>
+const sidebar = document.getElementById("sidebar");
+const main = document.getElementById("main");
+const btn = document.getElementById("collapseBtn");
+
+btn.addEventListener("click", () => {
+  sidebar.classList.toggle("collapsed");
+  main.classList.toggle("expanded");
+});
+</script>
+
+</body>
+</html>
