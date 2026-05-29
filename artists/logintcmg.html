@@ -317,26 +317,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <div class="background-glow"></div>
 
-<header>
-  <div class="container nav">
+<div id="header-placeholder"></div>
 
-  <!-- LOGO + TEXT -->
-  <a class="brand" href="testtcmg.html">
-    <img src="/artists/logo-transparent.png" />
-    <div class="brand-text">
-      <h1>Triple Crown</h1>
-      <p>Media Group</p>
-    </div>
-  </a>
-
-  <!-- NAV LINKS -->
-  <div class="nav-links">
-    <a href="servicestcmg.html" class="">Services</a>
-    <a class="login-btn" href="logintcmg.html">Artist Login</a>
-  </div>
-
-</div>
-</header>
 
 <div class="login-wrap">
 
@@ -357,6 +339,45 @@ document.addEventListener("DOMContentLoaded", function () {
   </div>
 
 </div>
+
+<script>
+fetch("header.html")
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById("header-placeholder").innerHTML = data;
+
+    // initialize mobile menu AFTER header loads
+    const menuToggle = document.getElementById("menuToggle");
+    const sidebar = document.getElementById("mobileSidebar");
+    const overlay = document.getElementById("mobileOverlay");
+
+    if (menuToggle) {
+      menuToggle.addEventListener("click", () => {
+        sidebar.classList.toggle("active");
+        overlay.classList.toggle("active");
+      });
+    }
+
+    if (overlay) {
+      overlay.addEventListener("click", () => {
+        sidebar.classList.remove("active");
+        overlay.classList.remove("active");
+      });
+    }
+
+    // highlight current page nav item
+    const currentPage = window.location.pathname.split("/").pop();
+
+    document.querySelectorAll(".nav-links a, .mobile-sidebar a").forEach(link => {
+      const href = link.getAttribute("href");
+
+      if (href === currentPage) {
+        link.classList.add("active");
+      }
+    });
+  })
+  .catch(error => console.error("Header failed to load:", error));
+</script>
 
 </body>
 </html>

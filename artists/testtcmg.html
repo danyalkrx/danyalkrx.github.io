@@ -56,17 +56,6 @@ body::before {
     linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.75));
 }
 
-/* HEADER */
-header {
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 1000;
-  backdrop-filter: blur(14px);
-  background: rgba(5,4,4,0.82);
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-}
-
 .container {
   max-width: 1320px;
   margin: 0 auto;
@@ -78,9 +67,10 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 22px 0;
+  position: relative;
 }
 
-/* BRAND (NOW CLICKABLE) */
+/* BRAND */
 .brand {
   display: flex;
   align-items: center;
@@ -109,8 +99,8 @@ header {
   font-size: 0.68rem;
 }
 
-/* BUTTON */
-    .nav-links {
+/* NAV */
+.nav-links {
   display: flex;
   align-items: center;
   gap: 28px;
@@ -145,7 +135,7 @@ header {
   background: rgba(255,255,255,0.6);
 }
 
-    .login-btn {
+.login-btn {
   border: 1px solid rgba(255,255,255,0.18);
   background: rgba(255,255,255,0.06);
   color: rgba(255,255,255,0.95);
@@ -156,11 +146,9 @@ header {
   font-size: 0.72rem;
   font-weight: 800;
   transition: all 0.25s ease;
-
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
   box-shadow: 0 0 0 rgba(255,255,255,0);
   margin-left: 18px;
 }
@@ -170,6 +158,92 @@ header {
   color: #000000 !important;
   transform: translateY(-2px);
   box-shadow: 0 10px 30px rgba(255,255,255,0.12);
+}
+
+/* MOBILE MENU BUTTON */
+.menu-toggle {
+  display: none;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.04);
+  border-radius: 12px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1200;
+}
+
+.menu-toggle span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: white;
+  position: relative;
+}
+
+.menu-toggle span::before,
+.menu-toggle span::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 18px;
+  height: 2px;
+  background: white;
+}
+
+.menu-toggle span::before {
+  top: -6px;
+}
+
+.menu-toggle span::after {
+  top: 6px;
+}
+
+/* SIDEBAR */
+.mobile-sidebar {
+  position: fixed;
+  top: 0;
+  left: -280px;
+  width: 280px;
+  height: 100vh;
+  background: rgba(8,8,8,0.98);
+  backdrop-filter: blur(20px);
+  border-right: 1px solid rgba(255,255,255,0.08);
+  z-index: 2000;
+  padding: 110px 32px 40px;
+  transition: left 0.35s ease;
+}
+
+.mobile-sidebar.active {
+  left: 0;
+}
+
+.mobile-sidebar a {
+  display: block;
+  text-decoration: none;
+  color: rgba(255,255,255,0.85);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.82rem;
+  margin-bottom: 34px;
+  font-weight: 700;
+}
+
+.mobile-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(3px);
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s ease;
+  z-index: 1500;
+}
+
+.mobile-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 /* HERO */
@@ -249,13 +323,64 @@ footer {
 /* MOBILE */
 @media (max-width: 980px) {
 
+  .container {
+    padding: 0 20px;
+  }
+
+  /* MOBILE HEADER */
+  .nav {
+    justify-content: center;
+    min-height: 118px; /* increased header height */
+  }
+
+  .menu-toggle {
+    display: flex;
+    position: absolute;
+    left: 14px; /* moved slightly right */
+    width: 46px;
+    height: 46px;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .brand {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .brand img {
+    width: 64px;
+  }
+
+  .brand-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1.1;
+  }
+
+  .brand-text h1 {
+    font-size: 0.92rem;
+    letter-spacing: 0.22em;
+  }
+
+  .brand-text p {
+    display: block;
+    font-size: 0.52rem;
+    letter-spacing: 0.24em;
+    opacity: 0.6;
+    margin-top: 3px;
+  }
+
   .hero {
-    padding: 120px 0 60px;
+    padding: 155px 0 60px; /* compensates for taller header */
     align-items: center;
     text-align: center;
   }
 
-  /* STACK EVERYTHING CENTERED */
   .hero-grid {
     grid-template-columns: 1fr;
     gap: 28px;
@@ -263,20 +388,17 @@ footer {
     text-align: center;
   }
 
-  /* TAG BOX CENTERED */
   .tag {
     margin-left: auto;
     margin-right: auto;
     font-size: 0.62rem;
   }
 
-  /* HEADLINE */
   .hero h2 {
     font-size: 3.2rem;
     text-align: center;
   }
 
-  /* PARAGRAPH */
   .hero p {
     font-size: 1rem;
     line-height: 1.8;
@@ -285,7 +407,6 @@ footer {
     margin: 0 auto;
   }
 
-  /* LOGO CONTAINER */
   .logo-background {
     display: flex;
     justify-content: center;
@@ -293,7 +414,6 @@ footer {
     min-height: 520px;
   }
 
-  /* BIGGER LOGO */
   .logo-background img {
     position: relative;
     width: 120%;
@@ -303,47 +423,6 @@ footer {
     transform: none;
     opacity: 0.8;
   }
-
-  /* HEADER ADJUSTMENT */
-  .brand img {
-    width: 70px;
-  }
-
-.brand-text p {
-  font-size: 0.55rem;
-  letter-spacing: 0.2em;
-  display: block;
-}
-
-  .login-btn {
-    padding: 10px 16px;
-    font-size: 0.65rem;
-  }
-
-  .brand {
-    gap: 30px;
-  }
-
-  .brand-text h1 {
-    font-size: 1rem;
-    letter-spacing: 0.28em;
-  }
-
-  .brand-text {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    line-height: 1.1;
-  }
-
-  .brand-text p {
-    display: block; /* override your earlier hide rule */
-    font-size: 0.55rem;
-    letter-spacing: 0.22em;
-    margin-top: 4px;
-    opacity: 0.6;
-  }
-
 }
 
 </style>
@@ -353,24 +432,7 @@ footer {
 
 <div class="background-glow"></div>
 
-<header>
-  <div class="container nav">
-
-    <a class="brand" href="testtcmg.html">
-    <img src="/artists/logo-transparent.png" />
-    <div class="brand-text">
-      <h1>Triple Crown</h1>
-      <p>Media Group</p>
-    </div>
-  </a>
-
-  <div class="nav-links">
-    <a href="servicestcmg.html" class="">Services</a>
-    <a class="login-btn" href="logintcmg.html">Artist Login</a>
-  </div>
-
-</div>
-</header>
+<div id="header-placeholder"></div>
 
 <section class="hero">
 
@@ -405,6 +467,33 @@ footer {
 <footer>
   © 2026 Triple Crown Media Group
 </footer>
+
+<script>
+fetch("header.html")
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById("header-placeholder").innerHTML = data;
+
+    // initialize sidebar AFTER header loads
+    const menuToggle = document.getElementById("menuToggle");
+    const sidebar = document.getElementById("mobileSidebar");
+    const overlay = document.getElementById("mobileOverlay");
+
+    if (menuToggle) {
+      menuToggle.addEventListener("click", () => {
+        sidebar.classList.toggle("active");
+        overlay.classList.toggle("active");
+      });
+    }
+
+    if (overlay) {
+      overlay.addEventListener("click", () => {
+        sidebar.classList.remove("active");
+        overlay.classList.remove("active");
+      });
+    }
+  });
+</script>
 
 </body>
 </html>

@@ -1,0 +1,281 @@
+<style>
+
+/* HEADER */
+header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  backdrop-filter: blur(14px);
+  background: rgba(5,4,4,0.82);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 0;
+  position: relative;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.brand img {
+  width: 80px;
+  opacity: 0.95;
+}
+
+.brand-text h1 {
+  font-size: 1rem;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  font-weight: 900;
+}
+
+.brand-text p {
+  margin-top: 4px;
+  color: rgba(255,255,255,0.42);
+  text-transform: uppercase;
+  letter-spacing: 0.26em;
+  font-size: 0.68rem;
+}
+
+/* DESKTOP NAV */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: rgba(255,255,255,0.65);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 600;
+  transition: 0.2s ease;
+  position: relative;
+}
+
+.nav-links a:hover {
+  color: rgba(255,255,255,0.95);
+}
+
+.login-btn {
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.95);
+  padding: 12px 20px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 0.72rem;
+  font-weight: 800;
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-btn:hover {
+  background: white;
+  color: black !important;
+  transform: translateY(-2px);
+}
+
+/* MOBILE MENU BUTTON */
+.menu-toggle {
+  display: none;
+  width: 46px;
+  height: 46px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.04);
+  border-radius: 12px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1200;
+}
+
+.menu-toggle span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: white;
+  position: relative;
+}
+
+.menu-toggle span::before,
+.menu-toggle span::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 18px;
+  height: 2px;
+  background: white;
+}
+
+.menu-toggle span::before {
+  top: -6px;
+}
+
+.menu-toggle span::after {
+  top: 6px;
+}
+
+/* SIDEBAR */
+.mobile-sidebar {
+  position: fixed;
+  top: 0;
+  left: -280px;
+  width: 280px;
+  height: 100vh;
+  background: rgba(8,8,8,0.98);
+  backdrop-filter: blur(20px);
+  border-right: 1px solid rgba(255,255,255,0.08);
+  z-index: 2000;
+  padding: 110px 32px 40px;
+  transition: left 0.35s ease;
+}
+
+.mobile-sidebar.active {
+  left: 0;
+}
+
+.mobile-sidebar a {
+  display: block;
+  text-decoration: none;
+  color: rgba(255,255,255,0.85);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.82rem;
+  margin-bottom: 34px;
+  font-weight: 700;
+}
+
+.mobile-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(3px);
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s ease;
+  z-index: 1500;
+}
+
+.mobile-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* MOBILE */
+@media (max-width: 980px) {
+
+  .nav {
+    justify-content: center;
+    min-height: 118px;
+  }
+
+  .menu-toggle {
+    display: flex;
+    position: absolute;
+    left: 14px;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .brand {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .brand img {
+    width: 64px;
+  }
+
+  .brand-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1.1;
+  }
+
+  .brand-text h1 {
+    font-size: 0.92rem;
+    letter-spacing: 0.22em;
+  }
+
+  .brand-text p {
+    font-size: 0.52rem;
+    letter-spacing: 0.24em;
+    opacity: 0.6;
+    margin-top: 3px;
+  }
+}
+
+</style>
+
+<header>
+  <div class="container nav">
+
+    <!-- MOBILE MENU BUTTON -->
+    <div class="menu-toggle" id="menuToggle">
+      <span></span>
+    </div>
+
+    <a class="brand" href="testtcmg.html">
+      <img src="/artists/logo-transparent.png" />
+      <div class="brand-text">
+        <h1>Triple Crown</h1>
+        <p>Media Group</p>
+      </div>
+    </a>
+
+    <div class="nav-links">
+      <a href="servicestcmg.html">Services</a>
+      <a class="login-btn" href="logintcmg.html">Artist Login</a>
+    </div>
+
+  </div>
+</header>
+
+<!-- MOBILE SIDEBAR -->
+<div class="mobile-sidebar" id="mobileSidebar">
+  <a href="testtcmg.html">Home</a>
+  <a href="servicestcmg.html">Services</a>
+  <a href="logintcmg.html">Artist Login</a>
+</div>
+
+<div class="mobile-overlay" id="mobileOverlay"></div>
+
+<script>
+const menuToggle = document.getElementById("menuToggle");
+const sidebar = document.getElementById("mobileSidebar");
+const overlay = document.getElementById("mobileOverlay");
+
+if (menuToggle) {
+  menuToggle.addEventListener("click", () => {
+    sidebar.classList.toggle("active");
+    overlay.classList.toggle("active");
+  });
+}
+
+if (overlay) {
+  overlay.addEventListener("click", () => {
+    sidebar.classList.remove("active");
+    overlay.classList.remove("active");
+  });
+}
+</script>
