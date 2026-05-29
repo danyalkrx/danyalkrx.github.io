@@ -295,22 +295,33 @@ footer {
 /* MOBILE */
 @media (max-width: 980px) {
 
-  header { display: none; }
+  header {
+    display: none;
+  }
 
   .hero {
     padding: 40px 0 70px;
     min-height: auto;
   }
 
+  /* FORCE SINGLE COLUMN + CENTER EVERYTHING */
   .hero-grid {
     grid-template-columns: 1fr;
     gap: 42px;
+    justify-items: center;   /* KEY FIX */
     text-align: center;
+  }
+
+  /* COVER ALWAYS CENTERED */
+  .cover-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center; /* KEY FIX */
   }
 
   .cover-art {
     width: 92vw;
-    margin: 0 auto;
+    max-width: 420px;
   }
 
   .cover-glow {
@@ -318,17 +329,36 @@ footer {
     filter: blur(90px);
   }
 
+  /* TEXT CENTERING */
+  .artist {
+    text-align: center;
+  }
+
   .title {
     font-size: 4.2rem;
+    text-align: center;
   }
 
+  .description {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 92%;
+    text-align: center;
+  }
+
+  /* BUTTONS CENTERED */
   .platforms {
     grid-template-columns: 1fr;
-    max-width: 92vw;
+    width: 92vw;
+    max-width: 420px;
     margin: 0 auto;
   }
-}
 
+  .platform-btn {
+    width: 100%;
+  }
+}
+  
 </style>
 </head>
 
