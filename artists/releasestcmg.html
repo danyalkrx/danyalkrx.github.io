@@ -387,37 +387,7 @@ body::before{
 
 <body>
 
-<aside class="sidebar" id="sidebar">
-
-  <div class="sidebar-top">
-
-    <div class="brand">
-      <img src="/artists/logo-transparent.png">
-      <div class="brand-text">
-        <h1>Triple Crown</h1>
-        <p>Media Group</p>
-      </div>
-    </div>
-
-  </div>
-
-  <nav class="nav-links">
-
-    <a class="nav-item" href="dashboardtcmg.html">
-      <span class="nav-icon">⌂</span>
-      <span class="nav-label">Dashboard</span>
-    </a>
-
-    <a class="nav-item active" href="releasestcmg.html">
-      <span class="nav-icon">♫</span>
-      <span class="nav-label">Releases</span>
-    </a>
-
-  </nav>
-
-  <button class="collapse-btn" id="collapseBtn">☰</button>
-
-</aside>
+<div id="sidebar-container"></div>
 
 <main class="main" id="main">
 
@@ -513,14 +483,65 @@ body::before{
 </main>
 
 <script>
-const sidebar = document.getElementById("sidebar");
-const main = document.getElementById("main");
-const btn = document.getElementById("collapseBtn");
 
-btn.addEventListener("click", () => {
-  sidebar.classList.toggle("collapsed");
-  main.classList.toggle("expanded");
-});
+
+let sidebar, main, collapseBtn;
+
+/* =========================
+   INIT AFTER SIDEBAR LOAD
+========================= */
+function initSidebar() {
+
+  sidebar = document.getElementById("sidebar");
+  main = document.getElementById("main");
+  collapseBtn = document.getElementById("collapseBtn");
+
+  const mobileToggle = document.getElementById("mobileToggle");
+  const overlay = document.getElementById("overlay");
+
+  function openSidebar(){
+    sidebar.classList.add("open");
+    overlay.classList.add("active");
+  }
+
+  function closeSidebar(){
+    sidebar.classList.remove("open");
+    overlay.classList.remove("active");
+  }
+
+  collapseBtn.addEventListener("click", () => {
+
+    if (window.innerWidth <= 1100) {
+      closeSidebar();
+      return;
+    }
+
+    sidebar.classList.toggle("collapsed");
+    main.classList.toggle("expanded");
+  });
+
+  mobileToggle.addEventListener("click", () => {
+    sidebar.classList.contains("open") ? closeSidebar() : openSidebar();
+  });
+
+  overlay.addEventListener("click", closeSidebar);
+
+  document.querySelectorAll(".nav-item").forEach(item => {
+    item.addEventListener("click", closeSidebar);
+  });
+
+}
+
+/* =========================
+   LOAD SIDEBAR
+========================= */
+fetch("sidebar.html")
+  .then(res => res.text())
+  .then(html => {
+    document.getElementById("sidebar-container").innerHTML = html;
+    initSidebar();
+  });
+  
 </script>
 
 </body>
