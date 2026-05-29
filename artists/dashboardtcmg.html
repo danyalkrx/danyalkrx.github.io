@@ -70,6 +70,21 @@ body::before{
   width:96px;
 }
 
+.sidebar.collapsed .sidebar-top{
+  align-items:center;
+}
+
+.sidebar.collapsed .collapse-btn{
+  margin:0 auto;
+}
+
+.sidebar.collapsed .brand{
+  width:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
 .sidebar-top{
   display:flex;
   flex-direction:column;
@@ -113,6 +128,11 @@ body::before{
 .sidebar.collapsed .brand-text{
   opacity:0;
   width:0;
+  overflow:hidden;
+}
+
+.sidebar.collapsed .brand img{
+  margin:0 auto;
 }
 
 .collapse-btn{
