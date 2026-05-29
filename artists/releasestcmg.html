@@ -55,11 +55,7 @@ body::before{
   z-index:100;
 }
 
-.sidebar.collapsed{
-  width:96px;
-}
-
-/* TOP BRAND */
+.sidebar.collapsed{ width:96px; }
 
 .sidebar-top{
   display:flex;
@@ -73,13 +69,9 @@ body::before{
   gap:14px;
 }
 
-.brand img{
-  width:54px;
-}
+.brand img{ width:54px; }
 
-.brand-text{
-  transition:0.2s ease;
-}
+.brand-text{ transition:0.2s ease; }
 
 .brand-text h1{
   font-size:0.9rem;
@@ -95,19 +87,15 @@ body::before{
   text-transform:uppercase;
 }
 
-/* collapse brand behavior */
 .sidebar.collapsed .brand-text{
   opacity:0;
   width:0;
   overflow:hidden;
 }
 
-/* CENTER BRAND WHEN COLLAPSED */
 .sidebar.collapsed .brand{
   justify-content:center;
 }
-
-/* NAV */
 
 .nav-links{
   display:flex;
@@ -137,25 +125,15 @@ body::before{
   color:white;
 }
 
-.nav-icon{
-  min-width:24px;
-  display:flex;
-  justify-content:center;
-  font-size:1rem;
-}
+.nav-icon{ min-width:24px; display:flex; justify-content:center; }
 
-
-.nav-label{
-  transition:0.2s ease;
-}
+.nav-label{ transition:0.2s ease; }
 
 .sidebar.collapsed .nav-label{
   opacity:0;
   width:0;
   overflow:hidden;
 }
-
-/* COLLAPSE BUTTON (BOTTOM) */
 
 .collapse-btn{
   width:42px;
@@ -165,9 +143,7 @@ body::before{
   background:rgba(255,255,255,0.05);
   color:white;
   cursor:pointer;
-
   margin-top:auto;
-  align-self:flex-start;
 }
 
 /* MAIN */
@@ -178,11 +154,7 @@ body::before{
   transition:0.3s ease;
 }
 
-.main.expanded{
-  margin-left:96px;
-}
-
-/* TOP */
+.main.expanded{ margin-left:96px; }
 
 .topbar{
   display:flex;
@@ -208,19 +180,14 @@ body::before{
   background:white;
   color:black;
   border:none;
-
   padding:18px 28px;
   font-size:0.85rem;
-
   border-radius:18px;
   font-weight:900;
   text-transform:uppercase;
   letter-spacing:0.14em;
-
   cursor:pointer;
   transition:0.22s ease;
-
-  box-shadow:0 10px 30px rgba(0,0,0,0.35);
 }
 
 .new-btn:hover{
@@ -245,10 +212,7 @@ body::before{
   background:rgba(255,255,255,0.03);
   border:1px solid rgba(255,255,255,0.06);
   transition:0.25s ease;
-}
-
-.release:hover{
-  transform:translateY(-6px);
+  cursor:pointer;
 }
 
 .release img{
@@ -258,30 +222,84 @@ body::before{
   display:block;
 }
 
-/* OVERLAY */
+/* ===== BOTTOM BLUR LAYER ===== */
+
+.release::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:100%;
+  height:0%;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  background: rgba(0,0,0,0.25);
+  transition:0.28s ease;
+  z-index:2;
+}
+
+.release:hover::after{
+  height:20%;
+}
+
+.release:hover{
+  transform:translateY(-6px);
+}
+
+/* OVERLAY CONTENT */
 
 .overlay{
   position:absolute;
   inset:0;
-  background:linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-  opacity:0;
-  transition:0.25s ease;
+  z-index:3;
   display:flex;
-  align-items:flex-end;
-  padding:20px;
-}
-
-.release:hover .overlay{
-  opacity:1;
+  flex-direction:column;
+  justify-content:flex-end;
+  padding:18px;
+  gap:12px;
 }
 
 .overlay-info{
   display:flex;
   justify-content:space-between;
-  width:100%;
-  font-size:0.75rem;
+  font-size:0.72rem;
   letter-spacing:0.18em;
   text-transform:uppercase;
+  opacity:0.9;
+  position:relative;
+  z-index:3;
+}
+
+/* SMART LINKS */
+
+.smart-links{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+
+  opacity:0;
+  transform:translateY(10px);
+  transition:0.25s ease;
+}
+
+.release:hover .smart-links{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.smart-links a{
+  font-size:0.65rem;
+  text-decoration:none;
+  color:white;
+  background:rgba(255,255,255,0.08);
+  padding:8px 10px;
+  border-radius:10px;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+}
+
+.smart-links a:hover{
+  background:rgba(255,255,255,0.18);
 }
 
 /* INFO */
@@ -307,9 +325,7 @@ body::before{
 
 @media(max-width:900px){
 
-  .sidebar{
-    display:none;
-  }
+  .sidebar{ display:none; }
 
   .main{
     margin-left:0;
@@ -318,6 +334,11 @@ body::before{
 
   .release-grid{
     grid-template-columns:1fr;
+  }
+
+  .smart-links{
+    opacity:1;
+    transform:none;
   }
 }
 
@@ -370,7 +391,7 @@ body::before{
     </div>
 
     <a href="newrelease.html">
-    <button class="new-btn">+ New Release</button>
+      <button class="new-btn">+ New Release</button>
     </a>
 
   </div>
@@ -379,40 +400,64 @@ body::before{
 
     <div class="release">
       <img src="/artists/takecare.jpg">
+
       <div class="overlay">
+
         <div class="overlay-info">
           <span>Drake</span>
           <span>2026</span>
         </div>
+
+        <div class="smart-links">
+          <a href="#">Smart Link</a>
+        </div>
+
       </div>
+
       <div class="info">
         <strong>Take Care</strong>
         <span>Single</span>
       </div>
     </div>
 
-    <div class="release">
+        <div class="release">
       <img src="/artists/habibti.jpg">
+
       <div class="overlay">
+
         <div class="overlay-info">
           <span>Drake</span>
           <span>2026</span>
         </div>
+
+        <div class="smart-links">
+          <a href="#">Smart Link</a>
+        </div>
+
       </div>
+
       <div class="info">
         <strong>Habibti</strong>
         <span>Single</span>
       </div>
     </div>
 
-    <div class="release">
-      <img src="/artists/iceman.jpeg">
+        <div class="release">
+      <img src="/artists/iceman.jpg">
+
       <div class="overlay">
+
         <div class="overlay-info">
           <span>Drake</span>
           <span>2025</span>
         </div>
+
+        <div class="smart-links">
+          <a href="#">Smart Link</a>
+        </div>
+
       </div>
+
       <div class="info">
         <strong>Iceman</strong>
         <span>EP</span>
