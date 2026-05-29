@@ -299,66 +299,72 @@ footer {
     display: none;
   }
 
+  /* IMPORTANT: kill desktop container behavior on mobile */
+  .container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
   .hero {
     padding: 40px 0 70px;
     min-height: auto;
   }
 
-  /* FORCE SINGLE COLUMN + CENTER EVERYTHING */
+  /* FORCE TRUE CENTERING SYSTEM */
   .hero-grid {
     grid-template-columns: 1fr;
     gap: 42px;
-    justify-items: center;   /* KEY FIX */
-    text-align: center;
+
+    justify-items: center;
+    align-items: center;
+
+    width: 100%;
+    margin: 0 auto;
   }
 
-  /* COVER ALWAYS CENTERED */
+  /* REMOVE GRID SIDE INFLUENCE COMPLETELY */
+  .hero-grid > div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* COVER CENTER FIX */
   .cover-wrapper {
     width: 100%;
     display: flex;
-    justify-content: center; /* KEY FIX */
+    justify-content: center;
   }
 
   .cover-art {
-    width: 92vw;
-    max-width: 420px;
+    width: min(92vw, 420px);
+    margin: 0 auto;
   }
 
-  .cover-glow {
-    inset: -120px;
-    filter: blur(90px);
-  }
-
-  /* TEXT CENTERING */
-  .artist {
-    text-align: center;
-  }
-
-  .title {
-    font-size: 4.2rem;
+  /* TEXT */
+  .artist,
+  .title,
+  .description {
     text-align: center;
   }
 
   .description {
-    margin-left: auto;
-    margin-right: auto;
     max-width: 92%;
-    text-align: center;
   }
 
-  /* BUTTONS CENTERED */
+  /* BUTTON WRAPPER */
   .platforms {
-    grid-template-columns: 1fr;
-    width: 92vw;
-    max-width: 420px;
+    width: min(92vw, 420px);
     margin: 0 auto;
+    grid-template-columns: 1fr;
   }
 
   .platform-btn {
     width: 100%;
   }
 }
-  
+
 </style>
 </head>
 
