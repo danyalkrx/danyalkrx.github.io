@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>Triple Crown — Artist Dashboard</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'Inter',sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(100,100,255,0.08), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(255,255,255,0.05), transparent 32%),
+    #040404;
+  color:rgba(255,255,255,0.92);
+  overflow-x:hidden;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background-image:url("https://grainy-gradients.vercel.app/noise.svg");
+  opacity:0.04;
+  pointer-events:none;
+}
+
+.background-glow{
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  background:
+    radial-gradient(circle at 15% 10%, rgba(255,255,255,0.03), transparent 40%),
+    radial-gradient(circle at 80% 90%, rgba(90,110,255,0.06), transparent 50%);
+}
+
+/* SIDEBAR */
+
+.sidebar{
+  position:fixed;
+  left:0;
+  top:0;
+  width:270px;
+  height:100vh;
+  border-right:1px solid rgba(255,255,255,0.06);
+  background:rgba(7,7,7,0.75);
+  backdrop-filter:blur(20px);
+  padding:34px 28px;
+  z-index:100;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  margin-bottom:60px;
+}
+
+.brand img{
+  width:62px;
+}
+
+.brand-text h1{
+  font-size:0.95rem;
+  letter-spacing:0.34em;
+  text-transform:uppercase;
+  font-weight:900;
+}
+
+.brand-text p{
+  font-size:0.65rem;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  opacity:0.45;
+  margin-top:4px;
+}
+
+.nav-links{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+.nav-item{
+  text-decoration:none;
+  color:rgba(255,255,255,0.72);
+  padding:16px 18px;
+  border-radius:18px;
+  transition:0.2s ease;
+  font-size:0.82rem;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  border:1px solid transparent;
+  font-weight:700;
+}
+
+.nav-item:hover,
+.nav-item.active{
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.06);
+  color:white;
+}
+
+/* MAIN */
+
+.main{
+  margin-left:270px;
+  padding:42px;
+}
+
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:38px;
+}
+
+.page-title h2{
+  font-size:2.6rem;
+  font-weight:900;
+  letter-spacing:-0.04em;
+}
+
+.page-title p{
+  margin-top:10px;
+  color:rgba(255,255,255,0.45);
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  font-size:0.75rem;
+}
+
+.profile{
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+
+.profile img{
+  width:56px;
+  height:56px;
+  border-radius:50%;
+  object-fit:cover;
+}
+
+.profile-info strong{
+  display:block;
+  font-size:0.95rem;
+}
+
+.profile-info span{
+  font-size:0.7rem;
+  opacity:0.5;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+}
+
+/* CARDS */
+
+.stats-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:22px;
+  margin-bottom:30px;
+}
+
+.card{
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:28px;
+  padding:28px;
+  backdrop-filter:blur(18px);
+  position:relative;
+  overflow:hidden;
+}
+
+.card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(to bottom right,
+    rgba(255,255,255,0.04),
+    transparent 40%);
+  pointer-events:none;
+}
+
+.stat-label{
+  font-size:0.72rem;
+  text-transform:uppercase;
+  letter-spacing:0.2em;
+  color:rgba(255,255,255,0.45);
+  margin-bottom:16px;
+}
+
+.stat-value{
+  font-size:2.5rem;
+  font-weight:900;
+  letter-spacing:-0.05em;
+}
+
+.stat-change{
+  margin-top:14px;
+  color:#7dffbc;
+  font-size:0.82rem;
+  font-weight:700;
+  letter-spacing:0.08em;
+}
+
+/* LARGE GRID */
+
+.content-grid{
+  display:grid;
+  grid-template-columns:1.4fr 0.9fr;
+  gap:24px;
+  margin-bottom:24px;
+}
+
+/* CHART */
+
+.chart-card{
+  min-height:420px;
+}
+
+.chart-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:34px;
+}
+
+.chart-title h3{
+  font-size:1.2rem;
+  font-weight:800;
+}
+
+.chart-title p{
+  margin-top:8px;
+  color:rgba(255,255,255,0.42);
+  font-size:0.74rem;
+  text-transform:uppercase;
+  letter-spacing:0.16em;
+}
+
+.chart-placeholder{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:12px;
+  height:260px;
+  padding-top:20px;
+}
+
+.bar{
+  width:100%;
+  border-radius:18px 18px 6px 6px;
+  background:
+    linear-gradient(to top,
+    rgba(255,255,255,0.14),
+    rgba(130,150,255,0.55));
+  position:relative;
+}
+
+.bar::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to top, transparent, rgba(255,255,255,0.08));
+}
+
+.bar:nth-child(1){height:32%;}
+.bar:nth-child(2){height:48%;}
+.bar:nth-child(3){height:42%;}
+.bar:nth-child(4){height:68%;}
+.bar:nth-child(5){height:58%;}
+.bar:nth-child(6){height:88%;}
+.bar:nth-child(7){height:100%;}
+
+.chart-labels{
+  margin-top:18px;
+  display:flex;
+  justify-content:space-between;
+  color:rgba(255,255,255,0.34);
+  font-size:0.72rem;
+  text-transform:uppercase;
+  letter-spacing:0.14em;
+}
+
+/* TRACKS */
+
+.track-list{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+
+.track{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:16px;
+  border-radius:20px;
+  background:rgba(255,255,255,0.025);
+  border:1px solid rgba(255,255,255,0.04);
+}
+
+.track-left{
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+
+.track img{
+  width:58px;
+  height:58px;
+  border-radius:16px;
+  object-fit:cover;
+}
+
+.track-info strong{
+  display:block;
+  font-size:0.92rem;
+}
+
+.track-info span{
+  font-size:0.72rem;
+  opacity:0.45;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+}
+
+.track-stats{
+  text-align:right;
+}
+
+.track-stats strong{
+  display:block;
+  font-size:1rem;
+}
+
+.track-stats span{
+  font-size:0.72rem;
+  opacity:0.45;
+  text-transform:uppercase;
+  letter-spacing:0.12em;
+}
+
+/* PLATFORM TABLE */
+
+.platform-table{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+.platform-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px;
+  border-radius:20px;
+  background:rgba(255,255,255,0.025);
+  border:1px solid rgba(255,255,255,0.05);
+}
+
+.platform-left{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.platform-icon{
+  width:44px;
+  height:44px;
+  border-radius:14px;
+  background:rgba(255,255,255,0.08);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:800;
+}
+
+.platform-name strong{
+  display:block;
+}
+
+.platform-name span{
+  font-size:0.72rem;
+  opacity:0.45;
+  text-transform:uppercase;
+  letter-spacing:0.12em;
+}
+
+.platform-value{
+  text-align:right;
+}
+
+.platform-value strong{
+  display:block;
+}
+
+.platform-value span{
+  font-size:0.72rem;
+  opacity:0.45;
+}
+
+/* MOBILE */
+
+@media(max-width:1100px){
+
+  .sidebar{
+    display:none;
+  }
+
+  .main{
+    margin-left:0;
+    padding:24px;
+  }
+
+  .stats-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .content-grid{
+    grid-template-columns:1fr;
+  }
+
+}
+
+@media(max-width:760px){
+
+  .topbar{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:26px;
+  }
+
+  .page-title h2{
+    font-size:2rem;
+  }
+
+  .stats-grid{
+    grid-template-columns:1fr;
+  }
+
+  .card{
+    padding:24px;
+  }
+
+  .chart-placeholder{
+    gap:8px;
+  }
+
+  .track{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:18px;
+  }
+
+  .track-stats{
+    text-align:left;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="background-glow"></div>
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+  <div class="brand">
+
+    <img src="/artists/logo-transparent.png">
+
+    <div class="brand-text">
+      <h1>Triple Crown</h1>
+      <p>Media Group</p>
+    </div>
+
+  </div>
+
+  <nav class="nav-links">
+
+    <a class="nav-item active" href="#">
+      Dashboard
+    </a>
+
+    <a class="nav-item" href="#">
+      Releases
+    </a>
+
+    <a class="nav-item" href="#">
+      Analytics
+    </a>
+
+    <a class="nav-item" href="#">
+      Revenue
+    </a>
+
+    <a class="nav-item" href="#">
+      Publishing
+    </a>
+
+    <a class="nav-item" href="#">
+      Settings
+    </a>
+
+  </nav>
+
+</aside>
+
+<!-- MAIN -->
+
+<main class="main">
+
+  <div class="topbar">
+
+    <div class="page-title">
+      <h2>Artist Dashboard</h2>
+      <p>Realtime Streaming & Revenue Analytics</p>
+    </div>
+
+    <div class="profile">
+
+      <img src="/artists/profile.jpg">
+
+      <div class="profile-info">
+        <strong>Drake</strong>
+        <span>Triple Crown Artist</span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- STATS -->
+
+  <section class="stats-grid">
+
+    <div class="card">
+
+      <div class="stat-label">
+        Monthly Streams
+      </div>
+
+      <div class="stat-value">
+        482K
+      </div>
+
+      <div class="stat-change">
+        +18.4% This Month
+      </div>
+
+    </div>
+
+    <div class="card">
+
+      <div class="stat-label">
+        Estimated Revenue
+      </div>
+
+      <div class="stat-value">
+        $1,924
+      </div>
+
+      <div class="stat-change">
+        +11.2% Growth
+      </div>
+
+    </div>
+
+    <div class="card">
+
+      <div class="stat-label">
+        Monthly Listeners
+      </div>
+
+      <div class="stat-value">
+        128K
+      </div>
+
+      <div class="stat-change">
+        +7.9% Increase
+      </div>
+
+    </div>
+
+    <div class="card">
+
+      <div class="stat-label">
+        Playlist Adds
+      </div>
+
+      <div class="stat-value">
+        3.8K
+      </div>
+
+      <div class="stat-change">
+        +31% This Week
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- CONTENT -->
+
+  <section class="content-grid">
+
+    <!-- STREAM CHART -->
+
+    <div class="card chart-card">
+
+      <div class="chart-header">
+
+        <div class="chart-title">
+          <h3>Streaming Growth</h3>
+          <p>Last 7 Days</p>
+        </div>
+
+      </div>
+
+      <div class="chart-placeholder">
+
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+
+      </div>
+
+      <div class="chart-labels">
+
+        <span>Mon</span>
+        <span>Tue</span>
+        <span>Wed</span>
+        <span>Thu</span>
+        <span>Fri</span>
+        <span>Sat</span>
+        <span>Sun</span>
+
+      </div>
+
+    </div>
+
+    <!-- TOP PLATFORMS -->
+
+    <div class="card">
+
+      <div class="chart-title" style="margin-bottom:28px;">
+        <h3>Platform Revenue</h3>
+        <p>Current Month</p>
+      </div>
+
+      <div class="platform-table">
+
+        <div class="platform-row">
+
+          <div class="platform-left">
+
+            <div class="platform-icon">
+              ♫
+            </div>
+
+            <div class="platform-name">
+              <strong>Spotify</strong>
+              <span>312K Streams</span>
+            </div>
+
+          </div>
+
+          <div class="platform-value">
+            <strong>$1,084</strong>
+            <span>56%</span>
+          </div>
+
+        </div>
+
+        <div class="platform-row">
+
+          <div class="platform-left">
+
+            <div class="platform-icon">
+              
+            </div>
+
+            <div class="platform-name">
+              <strong>Apple Music</strong>
+              <span>88K Streams</span>
+            </div>
+
+          </div>
+
+          <div class="platform-value">
+            <strong>$542</strong>
+            <span>28%</span>
+          </div>
+
+        </div>
+
+        <div class="platform-row">
+
+          <div class="platform-left">
+
+            <div class="platform-icon">
+              ▶
+            </div>
+
+            <div class="platform-name">
+              <strong>YouTube Music</strong>
+              <span>52K Streams</span>
+            </div>
+
+          </div>
+
+          <div class="platform-value">
+            <strong>$188</strong>
+            <span>10%</span>
+          </div>
+
+        </div>
+
+        <div class="platform-row">
+
+          <div class="platform-left">
+
+            <div class="platform-icon">
+              ♪
+            </div>
+
+            <div class="platform-name">
+              <strong>TikTok</strong>
+              <span>1.2K Creations</span>
+            </div>
+
+          </div>
+
+          <div class="platform-value">
+            <strong>$110</strong>
+            <span>6%</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- TOP TRACKS -->
+
+  <section class="card">
+
+    <div class="chart-title" style="margin-bottom:28px;">
+      <h3>Top Performing Releases</h3>
+      <p>By Revenue & Streams</p>
+    </div>
+
+    <div class="track-list">
+
+      <div class="track">
+
+        <div class="track-left">
+
+          <img src="/artists/takecare.jpg">
+
+          <div class="track-info">
+            <strong>Take Care</strong>
+            <span>Single • 2026</span>
+          </div>
+
+        </div>
+
+        <div class="track-stats">
+          <strong>212K Streams</strong>
+          <span>$842 Revenue</span>
+        </div>
+
+      </div>
+
+      <div class="track">
+
+        <div class="track-left">
+
+          <img src="/artists/habibti.jpg">
+
+          <div class="track-info">
+            <strong>Habibti</strong>
+            <span>Single • 2026</span>
+          </div>
+
+        </div>
+
+        <div class="track-stats">
+          <strong>148K Streams</strong>
+          <span>$594 Revenue</span>
+        </div>
+
+      </div>
+
+      <div class="track">
+
+        <div class="track-left">
+
+          <img src="/artists/iceman.jpg">
+
+          <div class="track-info">
+            <strong>Iceman</strong>
+            <span>EP • 2025</span>
+          </div>
+
+        </div>
+
+        <div class="track-stats">
+          <strong>96K Streams</strong>
+          <span>$388 Revenue</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+</body>
+</html>
