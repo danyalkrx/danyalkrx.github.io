@@ -255,6 +255,22 @@ button:hover {
 </style>
 </head>
 
+<script>
+document.getElementById("loginForm").addEventListener("submit", function(e) {
+  e.preventDefault(); // stop form from refreshing page
+
+  const username = document.querySelector('input[type="text"]').value;
+  const password = document.querySelector('input[type="password"]').value;
+
+  if (username === "test" && password === "test") {
+    window.location.href = "dashboardtcmg.html";
+  } else {
+    alert("Invalid credentials");
+  }
+});
+</script>
+
+
 <body>
 
 <div class="background-glow"></div>
@@ -281,7 +297,7 @@ button:hover {
 
     <div class="login-title">Artist Access</div>
 
-    <form>
+    <form id="loginForm">
       <input type="text" placeholder="Username" />
       <input type="password" placeholder="Password" />
       <button type="submit">Login</button>
