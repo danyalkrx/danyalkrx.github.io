@@ -653,66 +653,50 @@ body::before{
         <p>Last 7 Days</p>
       </div>
 
-      <div class="line-chart">
+    <div class="line-chart">
 
-        <svg viewBox="0 0 700 280" preserveAspectRatio="none">
+      <div class="chart-tooltip" id="tooltip"></div>
 
-          <defs>
+      <svg viewBox="0 0 700 280" preserveAspectRatio="none">
 
-            <linearGradient id="gradientFill" x1="0" y1="0" x2="0" y2="1">
+        <!-- AREA (YOUR ORIGINAL GRAPH) -->
+        <path
+          d="
+          M 40 215
+          C 90 205, 120 185, 160 175
+          C 210 160, 240 145, 280 140
+          C 330 135, 360 118, 400 105
+          C 450 90, 480 72, 520 68
+          C 570 64, 610 48, 660 42
+          L 660 280 L 40 280 Z
+          "
+          fill="rgba(130,150,255,0.15)"
+        />
 
-              <stop offset="0%" stop-color="rgba(130,150,255,0.45)" />
-              <stop offset="100%" stop-color="rgba(130,150,255,0)" />
+        <!-- LINE (YOUR ORIGINAL GRAPH) -->
+        <path
+          class="chart-line"
+          d="
+          M 40 215
+          C 90 205, 120 185, 160 175
+          C 210 160, 240 145, 280 140
+          C 330 135, 360 118, 400 105
+          C 450 90, 480 72, 520 68
+          C 570 64, 610 48, 660 42
+          "
+        />
 
-            </linearGradient>
+        <!-- POINTS -->
+        <circle class="chart-point" cx="40" cy="215" r="6" data-value="120K"></circle>
+        <circle class="chart-point" cx="160" cy="175" r="6" data-value="180K"></circle>
+        <circle class="chart-point" cx="280" cy="140" r="6" data-value="240K"></circle>
+        <circle class="chart-point" cx="400" cy="105" r="6" data-value="310K"></circle>
+        <circle class="chart-point" cx="520" cy="68" r="6" data-value="420K"></circle>
+        <circle class="chart-point" cx="660" cy="42" r="6" data-value="500K"></circle>
 
-          </defs>
+      </svg>
 
-<!-- AREA -->
-
-<path
-  class="chart-area"
-  d="
-  M 40 215
-
-  C 90 205, 120 185, 160 175
-  C 210 160, 240 145, 280 140
-  C 330 135, 360 118, 400 105
-  C 450 90, 480 72, 520 68
-  C 570 64, 610 48, 660 42
-
-  L 660 280
-  L 40 280
-  Z
-  "
-/>
-
-<!-- LINE -->
-
-<path
-  class="chart-line"
-  d="
-  M 40 215
-
-  C 90 205, 120 185, 160 175
-  C 210 160, 240 145, 280 140
-  C 330 135, 360 118, 400 105
-  C 450 90, 480 72, 520 68
-  C 570 64, 610 48, 660 42
-  "
-/>
-
-          <!-- POINTS -->
-
-<circle class="chart-point" cx="40" cy="215" r="6"/>
-<circle class="chart-point" cx="160" cy="175" r="6"/>
-<circle class="chart-point" cx="280" cy="140" r="6"/>
-<circle class="chart-point" cx="400" cy="105" r="6"/>
-<circle class="chart-point" cx="520" cy="68" r="6"/>
-<circle class="chart-point" cx="660" cy="42" r="6"/>
-        </svg>
-
-      </div>
+    </div>
 
       <div class="chart-labels">
 
