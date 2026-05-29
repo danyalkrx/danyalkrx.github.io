@@ -510,6 +510,10 @@ body::before{
     grid-template-columns:1fr;
   }
 
+  .collapse-btn{
+    display:none;
+  }
+
 }
 
 @media(max-width:760px){
@@ -547,10 +551,81 @@ body::before{
 
 }
 
+  /* =========================
+   MOBILE SIDEBAR FIX
+========================= */
+
+.mobile-toggle{
+  display:none;
+  position:fixed;
+  bottom:18px;
+  right:18px;
+  z-index:2000;
+
+  width:56px;
+  height:56px;
+
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,0.1);
+  background:rgba(10,10,10,0.85);
+  backdrop-filter:blur(14px);
+
+  color:white;
+  font-size:22px;
+  cursor:pointer;
+
+  box-shadow:0 10px 30px rgba(0,0,0,0.4);
+}
+
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.55);
+  z-index:999;
+
+  opacity:0;
+  pointer-events:none;
+  transition:0.25s ease;
+}
+
+/* sidebar mobile behavior */
+@media (max-width:1100px){
+
+  .mobile-toggle{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  .sidebar{
+    transform:translateX(-100%);
+    transition:0.3s ease;
+    z-index:1000;
+  }
+
+  .sidebar.open{
+    transform:translateX(0);
+  }
+
+  .overlay.active{
+    opacity:1;
+    pointer-events:auto;
+  }
+
+  /* kill desktop collapse behavior on mobile */
+  .sidebar.collapsed{
+    width:270px;
+  }
+}
+
+
 </style>
 </head>
 
 <body>
+
+<button class="mobile-toggle" id="mobileToggle">☰</button>
+<div class="overlay" id="overlay"></div>
 
 <div class="background-glow"></div>
 
@@ -831,15 +906,66 @@ body::before{
 
 <script>
 
+
 const sidebar = document.getElementById("sidebar");
-const collapseBtn = document.getElementById("collapseBtn");
 const main = document.getElementById("main");
 
+const collapseBtn = document.getElementById("collapseBtn");
+const mobileToggle = document.getElementById("mobileToggle");
+const overlay = document.getElementById("overlay");
+
+/* =========================
+   HELPERS
+========================= */
+function openSidebar(){
+  sidebar.classList.add("open");
+  overlay.classList.add("active");
+}
+
+function closeSidebar(){
+  sidebar.classList.remove("open");
+  overlay.classList.remove("active");
+}
+
+/* =========================
+   DESKTOP COLLAPSE
+========================= */
 collapseBtn.addEventListener("click", () => {
+
+  if (window.innerWidth <= 1100) {
+    closeSidebar();
+    return;
+  }
 
   sidebar.classList.toggle("collapsed");
   main.classList.toggle("expanded");
+});
 
+/* =========================
+   MOBILE TOGGLE (FIXED)
+========================= */
+mobileToggle.addEventListener("click", () => {
+
+  const isOpen = sidebar.classList.contains("open");
+
+  if (isOpen) {
+    closeSidebar();
+  } else {
+    openSidebar();
+  }
+
+});
+
+/* =========================
+   OVERLAY CLOSE
+========================= */
+overlay.addEventListener("click", closeSidebar);
+
+/* =========================
+   NAV CLOSE
+========================= */
+document.querySelectorAll(".nav-item").forEach(item => {
+  item.addEventListener("click", closeSidebar);
 });
 
 </script>
